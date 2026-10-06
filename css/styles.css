@@ -2069,3 +2069,148 @@ button:focus-visible {
     }
 
 }
+
+/* =========================================
+   REGISTRO
+========================================= */
+
+.register-container {
+    align-items: start;
+}
+
+.register-card {
+    max-width: 560px;
+}
+
+
+/* TIPO DE USUARIO */
+
+.role-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 25px;
+}
+
+.role-fieldset legend {
+    margin-bottom: 12px;
+
+    color: #263f39;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.role-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+}
+
+.role-option {
+    cursor: pointer;
+}
+
+.role-option input {
+    position: absolute;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+.role-card {
+    min-height: 105px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 15px;
+
+    border: 2px solid #e0e8e5;
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    text-align: center;
+
+    transition: 0.2s ease;
+}
+
+.role-card:hover {
+    border-color: #9bcfc1;
+    background: #f7fcfa;
+}
+
+.role-option input:checked + .role-card {
+    border-color: #08745f;
+    background: #eaf8f3;
+}
+
+.role-option input:focus-visible + .role-card {
+    outline: 3px solid rgba(8, 116, 95, 0.2);
+}
+
+.role-icon {
+    font-size: 24px;
+
+    color: #08745f;
+}
+
+.role-card strong {
+    color: #173f38;
+}
+
+.role-card small {
+    color: #71807b;
+}
+
+
+/* DOS CAMPOS */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+
+/* ORGANIZACIÓN */
+
+.organization-field[hidden] {
+    display: none;
+}
+
+
+/* TÉRMINOS */
+
+.terms-group {
+    margin: 5px 0 22px;
+}
+
+.terms-group .checkbox-label {
+    align-items: flex-start;
+
+    line-height: 1.5;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 500px) {
+
+    .role-selector {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+}
