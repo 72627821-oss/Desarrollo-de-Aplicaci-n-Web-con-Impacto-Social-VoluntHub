@@ -1407,3 +1407,292 @@ button:focus-visible {
     }
 
 }
+
+
+/* =========================================
+   DETALLE DE OPORTUNIDAD
+========================================= */
+
+.detail-top {
+    padding: 30px 0 10px;
+    background: #ffffff;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.breadcrumb a {
+    color: #0b7567;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.opportunity-detail {
+    padding: 40px 0 80px;
+}
+
+.detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 0.85fr);
+    gap: 55px;
+    align-items: start;
+}
+
+.detail-main h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    margin: 15px 0 10px;
+    color: #123c35;
+}
+
+.detail-category {
+    display: inline-block;
+    background: #e5f7ef;
+    color: #08745f;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.detail-organization {
+    color: #66756f;
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+.detail-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 45px;
+}
+
+.meta-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 18px;
+    background: #f7faf9;
+    border: 1px solid #e4ebe8;
+    border-radius: 14px;
+}
+
+.meta-icon {
+    font-size: 22px;
+}
+
+.meta-item strong {
+    display: block;
+    color: #173f38;
+    margin-bottom: 3px;
+}
+
+.meta-item p {
+    margin: 0;
+    color: #65736e;
+}
+
+.detail-section {
+    padding: 30px 0;
+    border-top: 1px solid #e5e7eb;
+}
+
+.detail-section h2 {
+    margin-bottom: 16px;
+    color: #173f38;
+    font-size: 23px;
+}
+
+.detail-section p {
+    color: #5f6f69;
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.detail-list {
+    padding-left: 20px;
+    color: #5f6f69;
+}
+
+.detail-list li {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill {
+    padding: 9px 14px;
+    background: #edf7f3;
+    border-radius: 25px;
+    color: #176b5d;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.organization-box {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #e2e9e6;
+    border-radius: 16px;
+}
+
+.organization-avatar {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dff5ed;
+    color: #08745f;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.organization-box h3 {
+    color: #173f38;
+    margin-bottom: 5px;
+}
+
+.organization-box p {
+    margin: 0;
+}
+
+
+/* TARJETA DE POSTULACIÓN */
+
+.application-card {
+    position: sticky;
+    top: 100px;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #dfe9e5;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+}
+
+.application-label {
+    display: inline-block;
+    color: #0a7665;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.application-card h2 {
+    color: #173f38;
+    margin-bottom: 10px;
+}
+
+.application-card > p {
+    color: #66756f;
+    line-height: 1.6;
+}
+
+.application-info {
+    margin: 25px 0;
+    border-top: 1px solid #e4ebe8;
+    border-bottom: 1px solid #e4ebe8;
+    padding: 10px 0;
+}
+
+.application-info > div {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+}
+
+.application-info p {
+    margin: 0;
+    color: #66756f;
+}
+
+.application-info strong {
+    display: block;
+    color: #173f38;
+    margin-bottom: 2px;
+}
+
+.btn-full {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.application-note {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 12px;
+    color: #7b8984;
+}
+
+.favorite-detail.saved {
+    background: #e7f7f0;
+    color: #08745f;
+    border-color: #9bd7c6;
+}
+
+
+/* OPORTUNIDADES SIMILARES */
+
+.similar-opportunities {
+    background: #f6faf8;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .detail-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .application-card {
+        position: static;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .opportunity-detail {
+        padding-top: 25px;
+    }
+
+    .detail-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-main h1 {
+        font-size: 32px;
+    }
+
+    .application-card {
+        padding: 22px;
+    }
+
+    .organization-box {
+        align-items: flex-start;
+    }
+
+}
