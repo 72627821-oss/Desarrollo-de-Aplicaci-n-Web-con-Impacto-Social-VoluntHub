@@ -2978,3 +2978,235 @@ button:focus-visible {
     }
 
 }
+
+
+/* =========================================
+   CREAR OPORTUNIDAD
+========================================= */
+
+.create-opportunity-page {
+    min-height: 100vh;
+    padding: 55px 0 80px;
+    background: #f6faf8;
+}
+
+.create-opportunity-container {
+    max-width: 900px;
+}
+
+.create-header {
+    margin-bottom: 30px;
+}
+
+.create-header h1 {
+    margin: 8px 0 12px;
+    color: #173f38;
+    font-size: clamp(32px, 4vw, 45px);
+}
+
+.create-header p {
+    max-width: 650px;
+    color: #687873;
+    line-height: 1.7;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: #08745f;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+
+/* FORMULARIO */
+
+.create-form-card {
+    padding: 38px;
+    background: #ffffff;
+    border: 1px solid #e0e9e5;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
+}
+
+.form-section {
+    padding: 35px 0;
+    border-bottom: 1px solid #e5ebe8;
+}
+
+.form-section:first-child {
+    padding-top: 0;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.form-section-title {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    margin-bottom: 28px;
+}
+
+.form-section-number {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e2f6ef;
+    color: #08745f;
+
+    font-weight: 800;
+}
+
+.form-section-title h2 {
+    margin-bottom: 4px;
+    color: #173f38;
+    font-size: 20px;
+}
+
+.form-section-title p {
+    color: #7b8984;
+    font-size: 13px;
+}
+
+
+/* TEXTAREA */
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+
+/* CONTADORES */
+
+.field-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.character-counter {
+    margin-top: 6px;
+    color: #99a39f;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+
+/* HABILIDADES */
+
+.skills-fieldset {
+    margin-top: 10px;
+    padding: 0;
+    border: none;
+}
+
+.skills-fieldset legend {
+    margin-bottom: 5px;
+    color: #263f39;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.field-help {
+    margin-bottom: 15px;
+    color: #7c8985;
+    font-size: 12px;
+}
+
+.skills-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-checkbox {
+    cursor: pointer;
+}
+
+.skill-checkbox input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.skill-checkbox span {
+    display: inline-block;
+    padding: 9px 14px;
+
+    border: 1px solid #d9e4e0;
+    border-radius: 25px;
+
+    background: #ffffff;
+    color: #60716b;
+
+    font-size: 13px;
+
+    transition: 0.2s ease;
+}
+
+.skill-checkbox span:hover {
+    border-color: #91cabb;
+}
+
+.skill-checkbox input:checked + span {
+    border-color: #08745f;
+    background: #e5f6ef;
+    color: #08745f;
+    font-weight: 700;
+}
+
+.skill-checkbox input:focus-visible + span {
+    outline: 3px solid rgba(8, 116, 95, 0.2);
+}
+
+
+/* ACCIONES */
+
+.create-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding-top: 28px;
+}
+
+.create-message {
+    margin-top: 25px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+
+    .create-form-card {
+        padding: 25px 20px;
+    }
+
+    .create-actions {
+        flex-direction: column-reverse;
+    }
+
+    .create-actions .btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+}
