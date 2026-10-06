@@ -1,12 +1,483 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VoluntHub</title>
+
+    <meta
+      name="description"
+      content="VoluntHub conecta voluntarios con organizaciones sociales y oportunidades de voluntariado en Cusco."
+    />
+
+    <title>VoluntHub | Voluntariado en Cusco</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
+
   <body>
-    <h1>VoluntHub</h1>
-    <p>Conectando voluntarios con organizaciones sociales</p>
+    <!-- ========================================
+         ENCABEZADO
+    ========================================= -->
+
+    <header class="header">
+      <div class="container navbar">
+        <!-- Logo -->
+
+        <a
+          href="index.html"
+          class="logo"
+          aria-label="Ir al inicio de VoluntHub"
+        >
+          <img src="img/logo.jpg" alt="VoluntHub" />
+        </a>
+
+        <!-- Navegación -->
+
+        <nav class="nav" aria-label="Navegación principal">
+          <a href="index.html" class="active"> Inicio </a>
+
+          <a href="pages/oportunidades.html"> Oportunidades </a>
+
+          <a href="pages/nosotros.html"> Nosotros </a>
+        </nav>
+
+        <!-- Acciones -->
+
+        <div class="nav-actions">
+          <a href="pages/login.html" class="login-link"> Iniciar sesión </a>
+
+          <a href="pages/registro.html" class="btn btn-primary">
+            Crear cuenta
+          </a>
+        </div>
+
+        <!-- Menú móvil -->
+
+        <button
+          class="menu-button"
+          id="menuButton"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+
+      <!-- Navegación móvil -->
+
+      <nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
+        <a href="index.html"> Inicio </a>
+
+        <a href="pages/oportunidades.html"> Oportunidades </a>
+
+        <a href="pages/nosotros.html"> Nosotros </a>
+
+        <a href="pages/login.html"> Iniciar sesión </a>
+
+        <a href="pages/registro.html"> Crear cuenta </a>
+      </nav>
+    </header>
+
+    <!-- ========================================
+         CONTENIDO PRINCIPAL
+    ========================================= -->
+
+    <main>
+      <!-- ====================================
+             HERO
+        ===================================== -->
+
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <p class="eyebrow">✧ HAZ QUE TU TIEMPO CUENTE</p>
+
+            <h1>
+              Conecta con causas sociales
+              <span>en Cusco</span>
+            </h1>
+
+            <p class="hero-description">
+              Encuentra oportunidades cercanas, comparte tus talentos y sé parte
+              del cambio que nuestra comunidad necesita.
+            </p>
+
+            <div class="hero-actions">
+              <a
+                href="pages/oportunidades.html"
+                class="btn btn-primary btn-large"
+              >
+                Buscar voluntariados
+                <span aria-hidden="true">→</span>
+              </a>
+
+              <a href="#como-funciona" class="secondary-link">
+                Conoce cómo funciona
+              </a>
+            </div>
+
+            <div class="hero-community">
+              <div class="avatars" aria-hidden="true">
+                <span>MC</span>
+                <span>JP</span>
+                <span>AL</span>
+              </div>
+
+              <p>
+                <strong> Personas comprometidas </strong>
+
+                <br />
+
+                con causas sociales en Cusco
+              </p>
+            </div>
+          </div>
+
+          <!-- Imagen provisional -->
+
+          <div class="hero-visual">
+            <div class="hero-placeholder">
+              <div class="placeholder-icon">♡</div>
+
+              <p>
+                Voluntariado
+                <strong>en Cusco</strong>
+              </p>
+            </div>
+
+            <div class="floating-card floating-top">
+              <span class="floating-icon"> ✦ </span>
+
+              <div>
+                <strong> Nuevas oportunidades </strong>
+
+                <small> Descubre cómo ayudar </small>
+              </div>
+            </div>
+
+            <div class="floating-card floating-bottom">
+              <span class="floating-icon"> ✓ </span>
+
+              <div>
+                <strong> Impacto social </strong>
+
+                <small> Organizaciones locales </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================
+             OPORTUNIDADES DESTACADAS
+        ===================================== -->
+
+      <section class="featured">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">OPORTUNIDADES DESTACADAS</p>
+
+              <h2>Una causa está esperando por ti</h2>
+            </div>
+
+            <a href="pages/oportunidades.html" class="view-all">
+              Ver todas
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="opportunity-grid">
+            <!-- =========================
+                         OPORTUNIDAD 1
+                    ========================== -->
+
+            <article class="opportunity-card">
+              <div class="card-image card-environment">
+                <span class="category"> Medio Ambiente </span>
+
+                <button
+                  class="favorite"
+                  type="button"
+                  aria-label="Guardar oportunidad Reforestación en el Valle Sagrado"
+                >
+                  ♡
+                </button>
+
+                <div class="image-placeholder">🌱</div>
+              </div>
+
+              <div class="card-content">
+                <p class="organization">BOSQUES DE CUSCO</p>
+
+                <h3>Reforestación en el Valle Sagrado</h3>
+
+                <div class="opportunity-info">
+                  <p>
+                    <span aria-hidden="true">▣</span>
+                    Sáb, 14 de junio
+                  </p>
+
+                  <p>
+                    <span aria-hidden="true">⌖</span>
+                    Urubamba
+                  </p>
+                </div>
+
+                <div class="tags">
+                  <span> Trabajo en equipo </span>
+
+                  <span> Aire libre </span>
+                </div>
+
+                <a
+                  href="pages/detalle-oportunidad.html?id=1"
+                  class="detail-link"
+                >
+                  Ver detalle
+
+                  <span aria-hidden="true"> → </span>
+                </a>
+              </div>
+            </article>
+
+            <!-- =========================
+                         OPORTUNIDAD 2
+                    ========================== -->
+
+            <article class="opportunity-card">
+              <div class="card-image card-education">
+                <span class="category"> Educación </span>
+
+                <button
+                  class="favorite"
+                  type="button"
+                  aria-label="Guardar oportunidad Refuerzo escolar para niños"
+                >
+                  ♡
+                </button>
+
+                <div class="image-placeholder">📚</div>
+              </div>
+
+              <div class="card-content">
+                <p class="organization">SEMILLAS DEL ANDE</p>
+
+                <h3>Refuerzo escolar para niños</h3>
+
+                <div class="opportunity-info">
+                  <p>
+                    <span aria-hidden="true">▣</span>
+                    Martes y jueves
+                  </p>
+
+                  <p>
+                    <span aria-hidden="true">⌖</span>
+                    San Sebastián
+                  </p>
+                </div>
+
+                <div class="tags">
+                  <span> Comunicación </span>
+
+                  <span> Enseñanza </span>
+                </div>
+
+                <a
+                  href="pages/detalle-oportunidad.html?id=2"
+                  class="detail-link"
+                >
+                  Ver detalle
+
+                  <span aria-hidden="true"> → </span>
+                </a>
+              </div>
+            </article>
+
+            <!-- =========================
+                         OPORTUNIDAD 3
+                    ========================== -->
+
+            <article class="opportunity-card">
+              <div class="card-image card-animal">
+                <span class="category"> Protección Animal </span>
+
+                <button
+                  class="favorite"
+                  type="button"
+                  aria-label="Guardar oportunidad Jornada de cuidado animal"
+                >
+                  ♡
+                </button>
+
+                <div class="image-placeholder">🐾</div>
+              </div>
+
+              <div class="card-content">
+                <p class="organization">PATITAS CUSCO</p>
+
+                <h3>Jornada de cuidado animal</h3>
+
+                <div class="opportunity-info">
+                  <p>
+                    <span aria-hidden="true">▣</span>
+                    Dom, 22 de junio
+                  </p>
+
+                  <p>
+                    <span aria-hidden="true">⌖</span>
+                    Wanchaq
+                  </p>
+                </div>
+
+                <div class="tags">
+                  <span> Cuidado animal </span>
+
+                  <span> Empatía </span>
+                </div>
+
+                <a
+                  href="pages/detalle-oportunidad.html?id=3"
+                  class="detail-link"
+                >
+                  Ver detalle
+
+                  <span aria-hidden="true"> → </span>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================
+             CÓMO FUNCIONA
+        ===================================== -->
+
+      <section class="how-it-works" id="como-funciona">
+        <div class="container">
+          <div class="section-center">
+            <p class="eyebrow">¿CÓMO FUNCIONA?</p>
+
+            <h2>Empieza a generar impacto</h2>
+
+            <p>
+              Encontrar una oportunidad de voluntariado puede ser sencillo con
+              VoluntHub.
+            </p>
+          </div>
+
+          <div class="steps-grid">
+            <article class="step">
+              <span class="step-number"> 01 </span>
+
+              <div class="step-icon">♙</div>
+
+              <h3>Crea tu cuenta</h3>
+
+              <p>
+                Regístrate como voluntario y completa tu información básica,
+                intereses y habilidades.
+              </p>
+            </article>
+
+            <article class="step">
+              <span class="step-number"> 02 </span>
+
+              <div class="step-icon">⌕</div>
+
+              <h3>Encuentra una causa</h3>
+
+              <p>
+                Busca oportunidades según la categoría, ubicación o
+                disponibilidad que mejor se adapte a ti.
+              </p>
+            </article>
+
+            <article class="step">
+              <span class="step-number"> 03 </span>
+
+              <div class="step-icon">♡</div>
+
+              <h3>Participa</h3>
+
+              <p>
+                Postula a una oportunidad y forma parte de actividades que
+                buscan generar impacto social.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================
+             IMPACTO
+        ===================================== -->
+
+      <section class="impact">
+        <div class="container impact-grid">
+          <div class="impact-intro">
+            <div class="impact-icon">♡</div>
+
+            <div>
+              <small> NUESTRO IMPACTO </small>
+
+              <h3>Crece con cada persona</h3>
+            </div>
+          </div>
+
+          <!--
+                    Los valores se mantienen sin cifras
+                    porque el prototipo todavía no cuenta
+                    con información real.
+                -->
+
+          <div class="metric">
+            <strong>—</strong>
+
+            <span> Voluntarios registrados </span>
+          </div>
+
+          <div class="metric">
+            <strong>—</strong>
+
+            <span> Organizaciones aliadas </span>
+          </div>
+
+          <div class="metric">
+            <strong>—</strong>
+
+            <span> Horas de voluntariado </span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================================
+         PIE DE PÁGINA
+    ========================================= -->
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo"> Volunt<span>Hub</span> </a>
+
+          <p>Conectamos personas con causas que transforman Cusco.</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Navegación secundaria">
+          <a href="pages/oportunidades.html"> Oportunidades </a>
+
+          <a href="pages/nosotros.html"> Nosotros </a>
+
+          <a href="mailto:contacto@volunthub.pe"> Contacto </a>
+        </nav>
+
+        <p class="copyright">© 2026 VoluntHub</p>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
   </body>
 </html>
