@@ -1696,3 +1696,376 @@ button:focus-visible {
     }
 
 }
+
+/* =========================================
+   LOGIN Y REGISTRO
+========================================= */
+
+.auth-page {
+    min-height: calc(100vh - 80px);
+    background: #f5faf8;
+    padding: 70px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: 70px;
+    align-items: center;
+}
+
+
+/* INFORMACIÓN */
+
+.auth-info h1 {
+    margin: 12px 0 18px;
+
+    font-size: clamp(36px, 5vw, 55px);
+    line-height: 1.05;
+
+    color: #123c35;
+}
+
+.auth-info > p {
+    max-width: 520px;
+
+    font-size: 17px;
+    line-height: 1.8;
+
+    color: #60716b;
+}
+
+.auth-benefits {
+    margin-top: 35px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.auth-benefit {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.auth-benefit > span {
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dff5ed;
+    color: #08745f;
+
+    font-weight: 800;
+}
+
+.auth-benefit strong {
+    color: #173f38;
+}
+
+.auth-benefit p {
+    margin-top: 4px;
+
+    color: #697973;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* TARJETA */
+
+.auth-card {
+    background: #ffffff;
+
+    padding: 38px;
+
+    border: 1px solid #e0e9e5;
+    border-radius: 22px;
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.07);
+}
+
+.auth-card-header {
+    margin-bottom: 30px;
+}
+
+.auth-card-header h2 {
+    margin-bottom: 8px;
+
+    font-size: 30px;
+
+    color: #173f38;
+}
+
+.auth-card-header p {
+    color: #697973;
+    line-height: 1.6;
+}
+
+
+/* FORMULARIOS */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #263f39;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #cfdcd7;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #263f39;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #0b806e;
+
+    box-shadow:
+        0 0 0 3px rgba(11, 128, 110, 0.12);
+}
+
+
+/* ERROR */
+
+.form-error {
+    display: block;
+
+    min-height: 17px;
+
+    margin-top: 6px;
+
+    color: #c23b3b;
+
+    font-size: 12px;
+}
+
+.input-error {
+    border-color: #c23b3b !important;
+}
+
+
+/* CONTRASEÑA */
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 50px;
+}
+
+.show-password {
+    position: absolute;
+
+    top: 50%;
+    right: 12px;
+
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 17px;
+}
+
+
+/* FILA SUPERIOR */
+
+.label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.forgot-link {
+    color: #08745f;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+
+/* RECORDAR */
+
+.remember-row {
+    margin-bottom: 20px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #61716b;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    accent-color: #08745f;
+}
+
+
+/* BOTÓN */
+
+.auth-submit {
+    min-height: 48px;
+}
+
+
+/* MENSAJE */
+
+.form-message {
+    min-height: 20px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+.success-message {
+    color: #08745f;
+
+    background: #e9f8f2;
+
+    padding: 10px;
+
+    border-radius: 8px;
+}
+
+
+/* REGISTRO */
+
+.auth-register {
+    margin-top: 22px;
+
+    text-align: center;
+
+    color: #687873;
+
+    font-size: 14px;
+}
+
+.auth-register a {
+    color: #08745f;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.auth-register a:hover {
+    text-decoration: underline;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+
+    .auth-container {
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+
+        gap: 45px;
+    }
+
+    .auth-info {
+        text-align: center;
+    }
+
+    .auth-info > p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .auth-benefits {
+        text-align: left;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .auth-page {
+        padding: 40px 15px;
+    }
+
+    .auth-card {
+        padding: 25px 20px;
+    }
+
+    .auth-info h1 {
+        font-size: 36px;
+    }
+
+    .label-row {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+}
