@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Explora oportunidades de voluntariado disponibles en VoluntHub."
+    >
+
+    <title>Oportunidades | VoluntHub</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+    <header class="header">
+
+        <div class="container nav-container">
+
+            <a
+                href="../index.html"
+                class="logo"
+                aria-label="VoluntHub - Inicio"
+            >
+                <img
+                    src="../img/logo.png"
+                    alt="Logo de VoluntHub"
+                    class="logo-img"
+                >
+
+                <span>VoluntHub</span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Abrir menú de navegación"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+            <nav
+                class="nav"
+                id="mainNav"
+                aria-label="Navegación principal"
+            >
+
+                <a
+                    href="../index.html"
+                    class="nav-link"
+                >
+                    Inicio
+                </a>
+
+                <a
+                    href="oportunidades.html"
+                    class="nav-link active"
+                >
+                    Oportunidades
+                </a>
+
+                <a
+                    href="../index.html#nosotros"
+                    class="nav-link"
+                >
+                    Nosotros
+                </a>
+
+                <div class="nav-actions">
+
+                    <a
+                        href="login.html"
+                        class="btn btn-outline"
+                    >
+                        Iniciar sesión
+                    </a>
+
+                    <a
+                        href="registro.html"
+                        class="btn btn-primary"
+                    >
+                        Crear cuenta
+                    </a>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         HERO
+    ========================================== -->
+    <main>
+
+        <section class="opportunities-hero">
+
+            <div class="container">
+
+                <span class="section-label">
+                    OPORTUNIDADES
+                </span>
+
+                <h1>
+                    Encuentra tu próxima oportunidad de ayudar
+                </h1>
+
+                <p>
+                    Explora actividades de voluntariado y encuentra
+                    una iniciativa que se adapte a tus intereses,
+                    ubicación y disponibilidad.
+                </p>
+
+
+                <!-- BUSCADOR -->
+                <div class="opportunities-search">
+
+                    <label
+                        for="searchOpportunity"
+                        class="sr-only"
+                    >
+                        Buscar oportunidades
+                    </label>
+
+                    <input
+                        type="search"
+                        id="searchOpportunity"
+                        placeholder="Buscar por nombre, categoría o ubicación..."
+                    >
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="searchButton"
+                    >
+                        Buscar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             CONTENIDO
+        ========================================== -->
+        <section class="opportunities-page">
+
+            <div class="container">
+
+
+                <!-- FILTROS -->
+                <div class="filters-card">
+
+                    <div class="filter-group">
+
+                        <label for="categoryFilter">
+                            Categoría
+                        </label>
+
+                        <select id="categoryFilter">
+
+                            <option value="todos">
+                                Todas
+                            </option>
+
+                            <option value="medio ambiente">
+                                Medio ambiente
+                            </option>
+
+                            <option value="educacion">
+                                Educación
+                            </option>
+
+                            <option value="animales">
+                                Protección animal
+                            </option>
+
+                            <option value="social">
+                                Ayuda social
+                            </option>
+
+                            <option value="comunidad">
+                                Comunidad
+                            </option>
+
+                            <option value="cultura">
+                                Cultura y patrimonio
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="locationFilter">
+                            Ubicación
+                        </label>
+
+                        <select id="locationFilter">
+
+                            <option value="todos">
+                                Todas
+                            </option>
+
+                            <option value="cusco">
+                                Cusco
+                            </option>
+
+                            <option value="urubamba">
+                                Urubamba
+                            </option>
+
+                            <option value="wanchaq">
+                                Wanchaq
+                            </option>
+
+                            <option value="san sebastian">
+                                San Sebastián
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="availabilityFilter">
+                            Disponibilidad
+                        </label>
+
+                        <select id="availabilityFilter">
+
+                            <option value="todos">
+                                Cualquier día
+                            </option>
+
+                            <option value="semana">
+                                Entre semana
+                            </option>
+
+                            <option value="fin de semana">
+                                Fin de semana
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="clear-filters"
+                        id="clearFilters"
+                    >
+                        Limpiar filtros
+                    </button>
+
+                </div>
+
+
+                <!-- CABECERA DE RESULTADOS -->
+                <div class="results-header">
+
+                    <div>
+
+                        <span
+                            class="results-count"
+                            id="resultsCount"
+                        >
+                            6 oportunidades encontradas
+                        </span>
+
+                    </div>
+
+
+                    <div class="sort-container">
+
+                        <label for="sortOpportunities">
+                            Ordenar:
+                        </label>
+
+                        <select id="sortOpportunities">
+
+                            <option value="default">
+                                Más recientes
+                            </option>
+
+                            <option value="az">
+                                Nombre A-Z
+                            </option>
+
+                            <option value="za">
+                                Nombre Z-A
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     TARJETAS
+                ========================================== -->
+                <div
+                    class="opportunities-grid"
+                    id="opportunitiesGrid"
+                >
+
+                    <!-- 1 -->
+                    <article
+                        class="opportunity-card"
+                        data-title="Reforestación en el Valle Sagrado"
+                        data-category="medio ambiente"
+                        data-location="urubamba"
+                        data-availability="fin de semana"
+                    >
+
+                        <div class="opportunity-card-top">
+
+                            <span class="opportunity-category">
+                                Medio ambiente
+                            </span>
+
+                            <button
+                                type="button"
+                                class="favorite-btn"
+                                aria-label="Guardar oportunidad"
+                            >
+                                ♡
+                            </button>
+
+                        </div>
+
+
+                        <div class="opportunity-icon">
+                            🌱
+                        </div>
+
+
+                        <h2>
+                            Reforestación en el Valle Sagrado
+                        </h2>
+
+                        <p class="opportunity-description">
+                            Participa en una jornada de reforestación
+                            y recuperación de espacios naturales.
+                        </p>
+
+
+                        <div class="opportunity-info">
+
+                            <span>
+                                📍 Urubamba, Cusco
+                            </span>
+
+                            <span>
+                                📅 Fin de semana
+                            </span>
+
+                            <span>
+                                👥 20 cupos
+                            </span>
+
+                        </div>
+
+
+                        <div class="opportunity-footer">
+
+                            <span class="organization-name">
+                                Organización ambiental
+                            </span>
+
+                            <a
+                                href="detalle-oportunidad.html"
+                                class="opportunity-link"
+                            >
+                                Ver oportunidad →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 2 -->
+                    <article
+                        class="opportunity-card"
+                        data-title="Refuerzo escolar para niños"
+                        data-category="educacion"
+                        data-location="san sebastian"
+                        data-availability="semana"
+                    >
+
+                        <div class="opportunity-card-top">
+
+                            <span class="opportunity-category">
+                                Educación
+                            </span>
+
+                            <button
+                                type="button"
+                                class="favorite-btn"
+                                aria-label="Guardar oportunidad"
+                            >
+                                ♡
+                            </button>
+
+                        </div>
+
+
+                        <div class="opportunity-icon">
+                            📚
+                        </div>
+
+
+                        <h2>
+                            Refuerzo escolar para niños
+                        </h2>
+
+                        <p class="opportunity-description">
+                            Apoya en actividades educativas y
+                            acompañamiento escolar para niños.
+                        </p>
+
+
+                        <div class="opportunity-info">
+
+                            <span>
+                                📍 San Sebastián, Cusco
+                            </span>
+
+                            <span>
+                                📅 Entre semana
+                            </span>
+
+                            <span>
+                                👥 12 cupos
+                            </span>
+
+                        </div>
+
+
+                        <div class="opportunity-footer">
+
+                            <span class="organization-name">
+                                Organización educativa
+                            </span>
+
+                            <a
+                                href="detalle-oportunidad.html"
+                                class="opportunity-link"
+                            >
+                                Ver oportunidad →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 3 -->
+                    <article
+                        class="opportunity-card"
+                        data-title="Jornada de cuidado animal"
+                        data-category="animales"
+                        data-location="wanchaq"
+                        data-availability="fin de semana"
+                    >
+
+                        <div class="opportunity-card-top">
+
+                            <span class="opportunity-category">
+                                Protección animal
+                            </span>
+
+                            <button
+                                type="button"
+                                class="favorite-btn"
+                                aria-label="Guardar oportunidad"
+                            >
+                                ♡
+                            </button>
+
+                        </div>
+
+
+                        <div class="opportunity-icon">
+                            🐾
+                        </div>
+
+
+                        <h2>
+                            Jornada de cuidado animal
+                        </h2>
+
+                        <p class="opportunity-description">
+                            Colabora en actividades de cuidado,
+                            limpieza y acompañamiento de animales.
+                        </p>
+
+
+                        <div class="opportunity-info">
+
+                            <span>
+                                📍 Wanchaq, Cusco
+                            </span>
+
+                            <span>
+                                📅 Fin de semana
+                            </span>
+
+                            <span>
+                                👥 15 cupos
+                            </span>
+
+                        </div>
+
+
+                        <div class="opportunity-footer">
+
+                            <span class="organization-name">
+                                Organización de protección animal
+                            </span>
+
+                            <a
+                                href="detalle-oportunidad.html"
+                                class="opportunity-link"
+                            >
+                                Ver oportunidad →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 4 -->
+                    <article
+                        class="opportunity-card"
+                        data-title="Campaña de recolección de alimentos"
+                        data-category="social"
+                        data-location="cusco"
+                        data-availability="fin de semana"
+                    >
+
+                        <div class="opportunity-card-top">
+
+                            <span class="opportunity-category">
+                                Ayuda social
+                            </span>
+
+                            <button
+                                type="button"
+                                class="favorite-btn"
+                                aria-label="Guardar oportunidad"
+                            >
+                                ♡
+                            </button>
+
+                        </div>
+
+
+                        <div class="opportunity-icon">
+                            📦
+                        </div>
+
+
+                        <h2>
+                            Campaña de recolección de alimentos
+                        </h2>
+
+                        <p class="opportunity-description">
+                            Apoya en la recepción, clasificación
+                            y organización de donaciones.
+                        </p>
+
+
+                        <div class="opportunity-info">
+
+                            <span>
+                                📍 Cusco
+                            </span>
+
+                            <span>
+                                📅 Fin de semana
+                            </span>
+
+                            <span>
+                                👥 18 cupos
+                            </span>
+
+                        </div>
+
+
+                        <div class="opportunity-footer">
+
+                            <span class="organization-name">
+                                Organización social
+                            </span>
+
+                            <a
+                                href="detalle-oportunidad.html"
+                                class="opportunity-link"
+                            >
+                                Ver oportunidad →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 5 -->
+                    <article
+                        class="opportunity-card"
+                        data-title="Taller de lectura comunitaria"
+                        data-category="educacion"
+                        data-location="cusco"
+                        data-availability="semana"
+                    >
+
+                        <div class="opportunity-card-top">
+
+                            <span class="opportunity-category">
+                                Educación
+                            </span>
+
+                            <button
+                                type="button"
+                                class="favorite-btn"
+                                aria-label="Guardar oportunidad"
+                            >
+                                ♡
+                            </button>
+
+                        </div>
+
+
+                        <div class="opportunity-icon">
+                            📖
+                        </div>
+
+
+                        <h2>
+                            Taller de lectura comunitaria
+                        </h2>
+
+                        <p class="opportunity-description">
+                            Participa en sesiones de lectura y
+                            actividades educativas comunitarias.
+                        </p>
+
+
+                        <div class="opportunity-info">
+
+                            <span>
+                                📍 Cusco
+                            </span>
+
+                            <span>
+                                📅 Entre semana
+                            </span>
+
+                            <span>
+                                👥 10 cupos
+                            </span>
+
+                        </div>
+
+
+                        <div class="opportunity-footer">
+
+                            <span class="organization-name">
+                                Organización comunitaria
+                            </span>
+
+                            <a
+                                href="detalle-oportunidad.html"
+                                class="opportunity-link"
+                            >
+                                Ver oportunidad →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 6 -->
+                    <article
+                        class="opportunity-card"
+                        data-title="Limpieza de espacios naturales"
+                        data-category="medio ambiente"
+                        data-location="cusco"
+                        data-availability="fin de semana"
+                    >
+
+                        <div class="opportunity-card-top">
+
+                            <span class="opportunity-category">
+                                Medio ambiente
+                            </span>
+
+                            <button
+                                type="button"
+                                class="favorite-btn"
+                                aria-label="Guardar oportunidad"
+                            >
+                                ♡
+                            </button>
+
+                        </div>
+
+
+                        <div class="opportunity-icon">
+                            🌿
+                        </div>
+
+
+                        <h2>
+                            Limpieza de espacios naturales
+                        </h2>
+
+                        <p class="opportunity-description">
+                            Participa en una jornada comunitaria
+                            de limpieza y cuidado del entorno.
+                        </p>
+
+
+                        <div class="opportunity-info">
+
+                            <span>
+                                📍 Cusco
+                            </span>
+
+                            <span>
+                                📅 Fin de semana
+                            </span>
+
+                            <span>
+                                👥 25 cupos
+                            </span>
+
+                        </div>
+
+
+                        <div class="opportunity-footer">
+
+                            <span class="organization-name">
+                                Organización ambiental
+                            </span>
+
+                            <a
+                                href="detalle-oportunidad.html"
+                                class="opportunity-link"
+                            >
+                                Ver oportunidad →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- SIN RESULTADOS -->
+                <div
+                    class="no-results"
+                    id="noResults"
+                    hidden
+                >
+
+                    <div class="no-results-icon">
+                        🔎
+                    </div>
+
+                    <h2>
+                        No encontramos oportunidades
+                    </h2>
+
+                    <p>
+                        Prueba cambiando los filtros o utiliza
+                        otra palabra de búsqueda.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="resetSearch"
+                    >
+                        Ver todas las oportunidades
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         CTA
+    ========================================== -->
+    <section class="opportunities-cta">
+
+        <div class="container">
+
+            <div>
+
+                <span class="section-label">
+                    PARTICIPA
+                </span>
+
+                <h2>
+                    ¿Encontraste una causa que te inspira?
+                </h2>
+
+                <p>
+                    Crea una cuenta para comenzar a participar
+                    en oportunidades de voluntariado.
+                </p>
+
+            </div>
+
+            <a
+                href="registro.html"
+                class="btn btn-primary"
+            >
+                Crear mi cuenta
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+    <footer class="footer">
+
+        <div class="container footer-bottom">
+
+            <p>
+                © 2026 VoluntHub. Proyecto académico.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/main.js"></script>
+    <script src="../js/oportunidades.js"></script>
+
+</body>
+</html>
