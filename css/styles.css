@@ -2214,3 +2214,506 @@ button:focus-visible {
     }
 
 }
+
+/* =========================================
+   PANEL DEL VOLUNTARIO
+========================================= */
+
+.dashboard {
+    min-height: 100vh;
+    padding: 55px 0 80px;
+    background: #f6faf8;
+}
+
+
+/* BIENVENIDA */
+
+.dashboard-welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+}
+
+.dashboard-welcome h1 {
+    margin: 8px 0;
+
+    font-size: clamp(32px, 4vw, 44px);
+
+    color: #173f38;
+}
+
+.dashboard-welcome p {
+    color: #687873;
+}
+
+
+/* ESTADÍSTICAS */
+
+.dashboard-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1eae6;
+    border-radius: 16px;
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+
+    min-width: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e8f7f1;
+
+    border-radius: 12px;
+
+    font-size: 20px;
+}
+
+.stat-card span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #73817c;
+
+    font-size: 13px;
+}
+
+.stat-card strong {
+    display: block;
+
+    color: #173f38;
+
+    font-size: 25px;
+}
+
+.stat-card small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #96a09c;
+
+    font-size: 10px;
+}
+
+
+/* ESTRUCTURA */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(260px, 0.7fr);
+
+    gap: 28px;
+
+    align-items: start;
+}
+
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+
+    gap: 28px;
+}
+
+.dashboard-section {
+    padding: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1eae6;
+    border-radius: 18px;
+}
+
+.dashboard-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.dashboard-section-header h2 {
+    margin-top: 5px;
+
+    color: #173f38;
+}
+
+
+/* POSTULACIONES */
+
+.applications-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.application-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 22px 0;
+
+    border-bottom: 1px solid #e7ecea;
+}
+
+.application-item:first-child {
+    padding-top: 5px;
+}
+
+.application-item:last-child {
+    padding-bottom: 5px;
+
+    border-bottom: none;
+}
+
+.application-category {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color: #08745f;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.application-item h3 {
+    margin-bottom: 7px;
+
+    color: #263f39;
+
+    font-size: 17px;
+}
+
+.application-item p {
+    margin-bottom: 5px;
+
+    color: #71807b;
+
+    font-size: 14px;
+}
+
+.application-item small {
+    color: #98a39f;
+
+    font-size: 11px;
+}
+
+.application-status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    gap: 12px;
+}
+
+
+/* ESTADOS */
+
+.status {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-pending {
+    background: #fff5d9;
+    color: #916b00;
+}
+
+.status-approved {
+    background: #e4f7ee;
+    color: #08745f;
+}
+
+.status-rejected {
+    background: #fdeaea;
+    color: #a63b3b;
+}
+
+.small-link {
+    color: #08745f;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.small-link:hover {
+    text-decoration: underline;
+}
+
+
+/* OPORTUNIDADES RECOMENDADAS */
+
+.dashboard-opportunities {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+.dashboard-opportunity {
+    display: flex;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    border: 1px solid #e3ebe8;
+    border-radius: 14px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.dashboard-opportunity:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-opportunity-icon {
+    width: 45px;
+    height: 45px;
+
+    min-width: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf7f2;
+
+    border-radius: 12px;
+
+    font-size: 21px;
+}
+
+.dashboard-opportunity-content > span {
+    color: #08745f;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.dashboard-opportunity-content h3 {
+    margin: 5px 0;
+
+    color: #263f39;
+
+    font-size: 15px;
+}
+
+.dashboard-opportunity-content p {
+    margin-bottom: 8px;
+
+    color: #71807b;
+
+    font-size: 12px;
+}
+
+.dashboard-opportunity-content a {
+    color: #08745f;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* PERFIL */
+
+.profile-card {
+    position: sticky;
+    top: 100px;
+
+    padding: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1eae6;
+    border-radius: 18px;
+
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dff5ed;
+    color: #08745f;
+
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.profile-card h2 {
+    color: #173f38;
+}
+
+.profile-role {
+    margin-top: 4px;
+
+    color: #75827d;
+
+    font-size: 13px;
+}
+
+.profile-divider {
+    height: 1px;
+
+    margin: 22px 0;
+
+    background: #e5ebe9;
+}
+
+.profile-information {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+
+    text-align: left;
+}
+
+.profile-information > div {
+    display: flex;
+
+    gap: 12px;
+
+    align-items: flex-start;
+}
+
+.profile-information p {
+    margin: 0;
+
+    color: #6c7b76;
+
+    font-size: 13px;
+}
+
+.profile-information strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #263f39;
+}
+
+.demo-notice {
+    margin-top: 15px;
+
+    color: #929d99;
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   RESPONSIVE PANEL
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .dashboard-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card {
+        position: static;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .dashboard-welcome {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-opportunities {
+        grid-template-columns: 1fr;
+    }
+
+    .application-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .application-status {
+        align-items: flex-start;
+    }
+
+    .dashboard-section {
+        padding: 20px;
+    }
+
+}
