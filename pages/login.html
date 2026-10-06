@@ -1,134 +1,186 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <meta
         name="description"
-        content="Inicia sesión en VoluntHub y accede a oportunidades de voluntariado en Cusco."
+        content="Inicia sesión en VoluntHub."
     >
 
     <title>Iniciar sesión | VoluntHub</title>
 
-    <link rel="stylesheet" href="../css/styles.css">
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 </head>
+
 
 <body>
 
-    <!-- HEADER -->
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
     <header class="header">
 
-        <div class="container nav-container">
+        <div class="container navbar">
+
+            <!-- LOGO -->
 
             <a
                 href="../index.html"
                 class="logo"
-                aria-label="VoluntHub - Inicio"
+                aria-label="Ir al inicio de VoluntHub"
             >
                 <img
                     src="../img/logo.png"
                     alt="Logo de VoluntHub"
-                    class="logo-img"
                 >
-
-                <span>VoluntHub</span>
             </a>
 
 
+            <!-- NAVEGACIÓN -->
+
+            <nav
+                class="nav"
+                aria-label="Navegación principal"
+            >
+
+                <a href="../index.html">
+                    Inicio
+                </a>
+
+                <a href="oportunidades.html">
+                    Oportunidades
+                </a>
+
+                <a href="../index.html#nosotros">
+                    Nosotros
+                </a>
+
+            </nav>
+
+
+            <!-- ACCIONES -->
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="login-link active"
+                >
+                    Iniciar sesión
+                </a>
+
+                <a
+                    href="registro.html"
+                    class="btn btn-primary"
+                >
+                    Crear cuenta
+                </a>
+
+            </div>
+
+
+            <!-- MENÚ MÓVIL -->
+
             <button
-                class="menu-toggle"
-                id="menuToggle"
-                aria-label="Abrir menú de navegación"
+                class="menu-button"
+                id="menuButton"
+                type="button"
+                aria-label="Abrir menú"
                 aria-expanded="false"
             >
                 ☰
             </button>
 
-
-            <nav
-                class="nav"
-                id="mainNav"
-                aria-label="Navegación principal"
-            >
-
-                <a
-                    href="../index.html"
-                    class="nav-link"
-                >
-                    Inicio
-                </a>
-
-                <a
-                    href="oportunidades.html"
-                    class="nav-link"
-                >
-                    Oportunidades
-                </a>
-
-                <a
-                    href="../index.html#nosotros"
-                    class="nav-link"
-                >
-                    Nosotros
-                </a>
-
-
-                <div class="nav-actions">
-
-                    <a
-                        href="login.html"
-                        class="btn btn-outline"
-                    >
-                        Iniciar sesión
-                    </a>
-
-                    <a
-                        href="registro.html"
-                        class="btn btn-primary"
-                    >
-                        Crear cuenta
-                    </a>
-
-                </div>
-
-            </nav>
-
         </div>
+
+
+        <!-- NAVEGACIÓN MÓVIL -->
+
+        <nav
+            class="mobile-nav"
+            id="mobileNav"
+            aria-label="Navegación móvil"
+        >
+
+            <a href="../index.html">
+                Inicio
+            </a>
+
+            <a href="oportunidades.html">
+                Oportunidades
+            </a>
+
+            <a href="../index.html#nosotros">
+                Nosotros
+            </a>
+
+            <a href="login.html">
+                Iniciar sesión
+            </a>
+
+            <a href="registro.html">
+                Crear cuenta
+            </a>
+
+        </nav>
 
     </header>
 
 
-    <!-- LOGIN -->
+    <!-- =========================================
+         LOGIN
+    ========================================== -->
+
     <main class="auth-page">
 
-        <section class="auth-container">
+        <div class="auth-container">
 
-            <!-- INFORMACIÓN -->
-            <div class="auth-info">
+
+            <!-- =====================================
+                 LADO IZQUIERDO
+            ====================================== -->
+
+            <section class="auth-info">
 
                 <span class="section-label">
                     BIENVENIDO DE NUEVO
                 </span>
 
                 <h1>
-                    Tu próxima oportunidad de ayudar te espera
+                    Sigue generando impacto con VoluntHub
                 </h1>
 
                 <p>
-                    Inicia sesión en VoluntHub para descubrir
-                    oportunidades de voluntariado y conectar
-                    con iniciativas sociales.
+                    Inicia sesión para explorar oportunidades,
+                    gestionar tus postulaciones y continuar
+                    participando en iniciativas sociales.
                 </p>
 
 
+                <!-- BENEFICIOS -->
+
                 <div class="auth-benefits">
+
 
                     <div class="auth-benefit">
 
-                        <span>✓</span>
+                        <span>
+                            ✓
+                        </span>
 
                         <div>
+
                             <strong>
                                 Encuentra oportunidades
                             </strong>
@@ -137,6 +189,7 @@
                                 Explora actividades según tus
                                 intereses y disponibilidad.
                             </p>
+
                         </div>
 
                     </div>
@@ -144,17 +197,21 @@
 
                     <div class="auth-benefit">
 
-                        <span>✓</span>
+                        <span>
+                            ✓
+                        </span>
 
                         <div>
+
                             <strong>
                                 Gestiona tus postulaciones
                             </strong>
 
                             <p>
-                                Consulta las actividades en las
-                                que deseas participar.
+                                Consulta las oportunidades en
+                                las que deseas participar.
                             </p>
+
                         </div>
 
                     </div>
@@ -162,30 +219,42 @@
 
                     <div class="auth-benefit">
 
-                        <span>✓</span>
+                        <span>
+                            ✓
+                        </span>
 
                         <div>
+
                             <strong>
-                                Genera impacto
+                                Conecta con causas sociales
                             </strong>
 
                             <p>
-                                Participa en iniciativas sociales
-                                y comunitarias.
+                                Encuentra iniciativas en las
+                                que puedes aportar tu tiempo
+                                y habilidades.
                             </p>
+
                         </div>
 
                     </div>
 
                 </div>
 
-            </div>
+            </section>
 
 
-            <!-- FORMULARIO -->
-            <div class="auth-card">
+            <!-- =====================================
+                 FORMULARIO
+            ====================================== -->
+
+            <section class="auth-card">
 
                 <div class="auth-card-header">
+
+                    <span class="section-label">
+                        ACCESO
+                    </span>
 
                     <h2>
                         Iniciar sesión
@@ -203,7 +272,9 @@
                     novalidate
                 >
 
+
                     <!-- CORREO -->
+
                     <div class="form-group">
 
                         <label for="email">
@@ -214,7 +285,7 @@
                             type="email"
                             id="email"
                             name="email"
-                            placeholder="ejemplo@correo.com"
+                            placeholder="nombre@correo.com"
                             autocomplete="email"
                             required
                         >
@@ -228,6 +299,7 @@
 
 
                     <!-- CONTRASEÑA -->
+
                     <div class="form-group">
 
                         <div class="label-row">
@@ -258,6 +330,7 @@
                                 required
                             >
 
+
                             <button
                                 type="button"
                                 class="show-password"
@@ -269,6 +342,7 @@
 
                         </div>
 
+
                         <small
                             class="form-error"
                             id="passwordError"
@@ -278,6 +352,7 @@
 
 
                     <!-- RECORDAR -->
+
                     <div class="remember-row">
 
                         <label class="checkbox-label">
@@ -298,6 +373,7 @@
 
 
                     <!-- MENSAJE -->
+
                     <div
                         class="form-message"
                         id="loginMessage"
@@ -306,6 +382,7 @@
 
 
                     <!-- BOTÓN -->
+
                     <button
                         type="submit"
                         class="btn btn-primary btn-full auth-submit"
@@ -313,6 +390,8 @@
                         Iniciar sesión
                     </button>
 
+
+                    <!-- REGISTRO -->
 
                     <p class="auth-register">
 
@@ -326,20 +405,56 @@
 
                 </form>
 
-            </div>
+            </section>
 
-        </section>
+        </div>
 
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
     <footer class="footer">
 
-        <div class="container footer-bottom">
+        <div class="container footer-content">
 
-            <p>
-                © 2026 VoluntHub. Proyecto académico.
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    Volunt<span>Hub</span>
+                </div>
+
+                <p>
+                    Conectando personas con causas sociales en Cusco.
+                </p>
+
+            </div>
+
+
+            <nav
+                class="footer-nav"
+                aria-label="Enlaces del pie de página"
+            >
+
+                <a href="../index.html">
+                    Inicio
+                </a>
+
+                <a href="oportunidades.html">
+                    Oportunidades
+                </a>
+
+                <a href="../index.html#nosotros">
+                    Nosotros
+                </a>
+
+            </nav>
+
+
+            <p class="copyright">
+                © 2026 VoluntHub
             </p>
 
         </div>
@@ -347,8 +462,14 @@
     </footer>
 
 
+    <!-- JS GENERAL -->
+
     <script src="../js/main.js"></script>
 
+
+    <!-- =========================================
+         JAVASCRIPT DEL LOGIN
+    ========================================== -->
 
     <script>
 
@@ -377,21 +498,37 @@
             document.getElementById("forgotPassword");
 
 
-        /* MOSTRAR / OCULTAR CONTRASEÑA */
+        /* =====================================
+           MOSTRAR / OCULTAR CONTRASEÑA
+        ====================================== */
 
         showPassword.addEventListener(
             "click",
             function () {
 
-                if (passwordInput.type === "password") {
+                if (
+                    passwordInput.type === "password"
+                ) {
 
                     passwordInput.type = "text";
+
                     showPassword.textContent = "🙈";
+
+                    showPassword.setAttribute(
+                        "aria-label",
+                        "Ocultar contraseña"
+                    );
 
                 } else {
 
                     passwordInput.type = "password";
+
                     showPassword.textContent = "👁";
+
+                    showPassword.setAttribute(
+                        "aria-label",
+                        "Mostrar contraseña"
+                    );
 
                 }
 
@@ -399,7 +536,9 @@
         );
 
 
-        /* RECUPERAR CONTRASEÑA */
+        /* =====================================
+           RECUPERAR CONTRASEÑA
+        ====================================== */
 
         forgotPassword.addEventListener(
             "click",
@@ -408,14 +547,16 @@
                 event.preventDefault();
 
                 alert(
-                    "La recuperación de contraseña se implementará en una siguiente etapa."
+                    "La recuperación de contraseña será implementada en una siguiente etapa."
                 );
 
             }
         );
 
 
-        /* VALIDACIÓN DEL LOGIN */
+        /* =====================================
+           VALIDACIÓN
+        ====================================== */
 
         loginForm.addEventListener(
             "submit",
@@ -423,14 +564,18 @@
 
                 event.preventDefault();
 
+
                 let valid = true;
 
 
                 /* LIMPIAR ERRORES */
 
                 emailError.textContent = "";
+
                 passwordError.textContent = "";
+
                 loginMessage.textContent = "";
+
 
                 emailInput.classList.remove(
                     "input-error"
@@ -447,14 +592,27 @@
 
                 /* VALIDAR CORREO */
 
+                const email =
+                    emailInput.value.trim();
+
+
                 const emailPattern =
                     /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-                if (
-                    !emailPattern.test(
-                        emailInput.value.trim()
-                    )
+                if (email === "") {
+
+                    emailError.textContent =
+                        "Ingresa tu correo electrónico.";
+
+                    emailInput.classList.add(
+                        "input-error"
+                    );
+
+                    valid = false;
+
+                } else if (
+                    !emailPattern.test(email)
                 ) {
 
                     emailError.textContent =
@@ -472,6 +630,19 @@
                 /* VALIDAR CONTRASEÑA */
 
                 if (
+                    passwordInput.value === ""
+                ) {
+
+                    passwordError.textContent =
+                        "Ingresa tu contraseña.";
+
+                    passwordInput.classList.add(
+                        "input-error"
+                    );
+
+                    valid = false;
+
+                } else if (
                     passwordInput.value.length < 6
                 ) {
 
@@ -487,12 +658,14 @@
                 }
 
 
-                /* LOGIN CORRECTO */
+                /* =================================
+                   LOGIN DEMOSTRATIVO
+                ================================== */
 
                 if (valid) {
 
                     loginMessage.textContent =
-                        "Datos validados correctamente.";
+                        "Datos validados correctamente. Ingresando...";
 
                     loginMessage.classList.add(
                         "success-message"
@@ -500,10 +673,11 @@
 
 
                     /*
-                     * LOGIN DEMOSTRATIVO
+                     * Actualmente VoluntHub no tiene
+                     * autenticación mediante backend.
                      *
-                     * Todavía no existe autenticación
-                     * mediante backend o base de datos.
+                     * Esta redirección permite demostrar
+                     * el flujo de navegación del prototipo.
                      */
 
                     setTimeout(
@@ -513,7 +687,7 @@
                                 "voluntario/panel.html";
 
                         },
-                        800
+                        900
                     );
 
                 }
@@ -524,4 +698,5 @@
     </script>
 
 </body>
+
 </html>
