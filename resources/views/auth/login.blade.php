@@ -1,47 +1,86 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión | VoluntHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    <!-- Navegación Superior -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-success" href="{{ route('home') }}">VoluntHub</a>
+            <div class="navbar-nav ms-auto align-items-center">
+                <a class="nav-link px-3" href="{{ route('home') }}">Inicio</a>
+                <a class="nav-link px-3" href="{{ route('oportunidades.index') }}">Oportunidades</a>
+                <a class="nav-link px-3" href="{{ route('nosotros') }}">Nosotros</a>
+                <a class="nav-link px-3 fw-semibold text-dark ms-2" href="{{ route('login') }}">Iniciar sesión</a>
+                <a class="btn text-white ms-2 px-3 fw-bold" style="background-color: #8cc63f; border: none;" href="{{ route('register') }}">Crear cuenta</a>
+            </div>
         </div>
+    </nav>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <!-- Formulario e Interfaz -->
+    <div class="container py-5">
+        <div class="row align-items-center justify-content-between min-vh-75 py-4">
+            
+            <div class="col-lg-6 pe-lg-5 mb-5 mb-lg-0">
+                <span class="text-uppercase text-muted small fw-bold">BIENVENIDO DE NUEVO</span>
+                <h1 class="display-4 fw-bold mt-2 text-dark">
+                    Sigue generando <br>
+                    <span style="color: #8cc63f;">impacto con VoluntHub</span>
+                </h1>
+                <p class="lead text-secondary mt-3">
+                    Inicia sesión para explorar oportunidades, gestionar tus postulaciones y continuar participando en iniciativas sociales.
+                </p>
+            </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-lg p-4 rounded-4 bg-white">
+                    <div class="card-body">
+                        <span class="text-uppercase text-muted small fw-bold">ACCESO</span>
+                        <h3 class="fw-bold text-dark mb-1">Iniciar sesión</h3>
+                        <p class="text-muted small mb-4">Ingresa tus datos para continuar.</p>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        @if ($errors->any())
+                            <div class="alert alert-danger py-2 small">
+                                <ul class="mb-0 ps-3">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label small fw-semibold text-muted">Correo electrónico</label>
+                                <input type="email" name="email" id="email" class="form-control bg-light" placeholder="nombre@correo.com" value="{{ old('email') }}" required autofocus>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label small fw-semibold text-muted">Contraseña</label>
+                                <input type="password" name="password" id="password" class="form-control bg-light" placeholder="Ingresa tu contraseña" required>
+                            </div>
+
+                            <button type="submit" class="btn w-100 py-3 fw-bold text-white rounded-3 mb-3" style="background-color: #8cc63f; border: none;">
+                                Iniciar sesión
+                            </button>
+
+                            <div class="text-center">
+                                <span class="small text-muted">¿Aún no tienes una cuenta? </span>
+                                <a href="{{ route('register') }}" class="small fw-bold text-dark text-decoration-none">Crear cuenta</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</body>
+</html>
