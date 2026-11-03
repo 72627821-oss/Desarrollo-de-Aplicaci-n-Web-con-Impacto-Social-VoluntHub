@@ -80,37 +80,23 @@
             color: #8cc63f;
         }
 
-        /* Tarjeta gradiente gigante de la derecha */
+        /* Tarjeta contenedor de imagen gigante de la derecha */
         .card-gradient-hero {
-            background: linear-gradient(135deg, #b8f090 0%, #7dbd72 50%, #5d9e5b 100%);
             border-radius: 40px;
             min-height: 480px;
             width: 100%;
             position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-        }
-
-        .heart-bubble {
-            width: 90px;
-            height: 90px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
 
         .badge-floating-custom {
             background: #ffffff;
             border-radius: 16px;
             padding: 1rem 1.25rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
             position: absolute;
             display: flex;
             align-items: center;
@@ -120,12 +106,12 @@
 
         .badge-floating-custom.top-right {
             top: 40px;
-            right: -20px;
+            right: 20px;
         }
 
         .badge-floating-custom.bottom-left {
             bottom: 40px;
-            left: -20px;
+            left: 20px;
         }
 
         .icon-box-small {
@@ -150,9 +136,11 @@
             height: 100%;
         }
 
-        .card-header-gradient-1 { background: linear-gradient(135deg, #a8e063, #56ab2f); }
-        .card-header-gradient-2 { background: linear-gradient(135deg, #f6d365, #fda085); }
-        .card-header-gradient-3 { background: linear-gradient(135deg, #84fab0, #8fd3f4); }
+        .card-img-header {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
 
         .like-heart-btn {
             width: 38px;
@@ -163,7 +151,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            z-index: 5;
         }
 
         /* Pasos 01 02 03 */
@@ -252,16 +241,10 @@
                         </div>
                     </div>
 
-                    <!-- Lado Derecho (Tarjeta Verde Gigante) -->
+                    <!-- Lado Derecho (Imagen Principal de Cusco) -->
                     <div class="col-lg-6 ps-lg-4">
                         <div class="card-gradient-hero">
-                            <div class="heart-bubble">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                            </div>
-                            <h2 class="fw-extrabold display-4 text-white mb-0">Voluntariado</h2>
-                            <h3 class="fw-bold fs-2 text-white opacity-90">en Cusco</h3>
+                            <img src="{{ asset('img/hero-cusco.jpeg') }}" alt="Voluntariado en Cusco" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0">
 
                             <!-- Insignias flotantes -->
                             <div class="badge-floating-custom top-right">
@@ -296,12 +279,15 @@
                 </div>
 
                 <div class="row g-4">
-                    <!-- Tarjeta 1 -->
+                    <!-- Tarjeta 1: Reforestación -->
                     <div class="col-md-4">
                         <div class="card-opportunity">
-                            <div class="p-4 card-header-gradient-1 position-relative d-flex justify-content-between align-items-start" style="min-height: 180px;">
-                                <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal">Medio Ambiente</span>
-                                <button class="like-heart-btn">♥</button>
+                            <div class="position-relative">
+                                <img src="{{ asset('img/bosques.jpeg') }}" alt="Reforestación en el Valle Sagrado" class="card-img-header">
+                                <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">Medio Ambiente</span>
+                                    <button class="like-heart-btn">♥</button>
+                                </div>
                             </div>
                             <div class="p-4">
                                 <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">BOSQUES DE CUSCO</span>
@@ -312,12 +298,15 @@
                         </div>
                     </div>
 
-                    <!-- Tarjeta 2 -->
+                    <!-- Tarjeta 2: Refuerzo Escolar -->
                     <div class="col-md-4">
                         <div class="card-opportunity">
-                            <div class="p-4 card-header-gradient-2 position-relative d-flex justify-content-between align-items-start" style="min-height: 180px;">
-                                <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal">Educación</span>
-                                <button class="like-heart-btn">♥</button>
+                            <div class="position-relative">
+                                <img src="{{ asset('img/educacion.jpeg') }}" alt="Refuerzo escolar para niños" class="card-img-header">
+                                <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">Educación</span>
+                                    <button class="like-heart-btn">♥</button>
+                                </div>
                             </div>
                             <div class="p-4">
                                 <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">SEMILLAS DEL ANDE</span>
@@ -328,12 +317,15 @@
                         </div>
                     </div>
 
-                    <!-- Tarjeta 3 -->
+                    <!-- Tarjeta 3: Cuidado Animal -->
                     <div class="col-md-4">
                         <div class="card-opportunity">
-                            <div class="p-4 card-header-gradient-3 position-relative d-flex justify-content-between align-items-start" style="min-height: 180px;">
-                                <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal">Protección Animal</span>
-                                <button class="like-heart-btn">♥</button>
+                            <div class="position-relative">
+                                <img src="{{ asset('img/animales.jpeg') }}" alt="Jornada de cuidado animal" class="card-img-header">
+                                <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">Protección Animal</span>
+                                    <button class="like-heart-btn">♥</button>
+                                </div>
                             </div>
                             <div class="p-4">
                                 <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">PATITAS CUSCO</span>
