@@ -3,61 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Models\Oportunidad;
-use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class OportunidadController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $oportunidades = Oportunidad::with('categoria', 'organizacion')->get();
-        return view('oportunidades', compact('oportunidades'));
+        $query = Oportunidad::query();
+
+        if ($request->has('search')) {
+            $query->where('titulo', 'like', '%' . $request->search . '%')
+                  ->orWhere('ubicacion', 'like', '%' . $request->search . '%');
+        }
+
+        $oportunidades = $query->latest()->get();
+
+        return view('oportunidades.index', compact('oportunidades'));
     }
 
-    public function create()
+    public function show($id)
     {
-        $categorias = Categoria::all();
-        return view('organizacion.crear-oportunidad', compact('categorias'));
+        $oportunidad = Oportunidad::find($id);
+
+        if (!$oportunidad) {
+            $oportunidad = (object)[
+                'id' => $id,
+                'titulo' => 'Causa Social en Cusco',
+                'organizacion' => 'Organización Local',
+                'categoria' => 'Voluntariado',
+                'ubicacion' => 'Cusco, Perú',
+                'fecha' => 'Próximamente',
+                'descripcion' => 'Descripción detallada del voluntariado y su impacto en la comunidad.'
+            ];
+        }
+
+        return view('oportunidades.show', compact('oportunidad'));
     }
 
-    public function store(Request $request)
+    // Método para manejar la acción del corazón (favorito)
+    public function toggleFavorito($id)
     {
-        $request->validate([
-            'id_categoria' => 'required|exists:categorias,id_categoria',
-            'titulo'       => 'required|string|max:150',
-            'descripcion'  => 'required|string',
-            'ubicacion'    => 'required|string|max:150',
-            'fecha'        => 'required|date',
-            'hora_inicio'  => 'required',
-            'hora_fin'     => 'required',
-            'cupos'        => 'required|integer|min:1',
-            'requisitos'   => 'nullable|string',
-        ]);
+        if (!auth()->check()) {
+            return response()->json(['error' => 'Unauthenticated'], 401);
+        }
 
-        $idOrganizacion = auth()->user()?->organizacion?->id_organizacion ?? 1;
-
-        Oportunidad::create([
-            'id_organizacion' => $idOrganizacion,
-            'id_categoria'    => $request->id_categoria,
-            'titulo'          => $request->titulo,
-            'descripcion'     => $request->descripcion,
-            'ubicacion'       => $request->ubicacion,
-            'fecha'           => $request->fecha,
-            'hora_inicio'     => $request->hora_inicio,
-            'hora_fin'        => $request->hora_fin,
-            'cupos'           => $request->cupos,
-            'requisitos'      => $request->requisitos,
-            'estado'          => 'disponible',
-        ]);
-
-        return redirect()->route('oportunidades.index')->with('success', '¡Oportunidad creada exitosamente!');
-    }
-
-    public function destroy($id)
-    {
-        $oportunidad = Oportunidad::findOrFail($id);
-        $oportunidad->delete();
-
-        return redirect()->back()->with('success', 'Oportunidad eliminada correctamente.');
+        return response()->json(['success' => true]);
     }
 }
