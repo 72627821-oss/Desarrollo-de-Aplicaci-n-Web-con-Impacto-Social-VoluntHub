@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title><?php echo $__env->yieldContent('titulo_pagina'); ?></title>
+</head>
+<body>
+    <?php echo $__env->yieldContent('contenido'); ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html><?php /**PATH C:\xampp\htdocs\laravel\login\resources\views/layouts/main.blade.php ENDPATH**/ ?>
