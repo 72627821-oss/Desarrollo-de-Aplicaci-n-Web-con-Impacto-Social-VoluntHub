@@ -166,8 +166,11 @@
                 @endphp
 
                 @forelse($listaOportunidades as $item)
+                @php
+    $itemId = $item->id ?? $item->id_oportunidad ?? $item->getKey();
+@endphp
                     <div class="col-md-4">
-                        <div class="card-opportunity" onclick="location.href='{{ route('oportunidades.show', $item->id) }}'">
+                        <div class="card-opportunity" onclick="location.href='{{ route('oportunidades.show', $itemId) }}'">
                             <div class="position-relative">
                                 <img src="{{ asset('img/' . ($item->imagen ?? 'bosques.jpg')) }}" alt="{{ $item->titulo }}" class="card-img-header" onerror="this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500'">
                                 <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">

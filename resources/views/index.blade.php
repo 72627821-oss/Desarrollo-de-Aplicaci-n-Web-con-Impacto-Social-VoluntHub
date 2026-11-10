@@ -6,7 +6,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>VoluntHub | Voluntariado en Cusco</title>
     
-    <!-- Carga directo de tu CSS original + Fuente Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +13,6 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}?v={{ time() }}">
 
     <style>
-        /* Ajustes de tipografía, tamaños y ancho fluido idénticos a tu prototipo */
         body {
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
             margin: 0;
@@ -30,7 +28,6 @@
             padding: 0 3rem;
         }
 
-        /* Header original */
         .header-custom {
             width: 100%;
             background: #ffffff;
@@ -64,7 +61,6 @@
             font-size: 0.95rem;
         }
 
-        /* Hero a pantalla completa */
         .hero-custom {
             padding: 4rem 0 5rem 0;
             background: linear-gradient(180deg, #ffffff 0%, #f7faf6 100%);
@@ -82,7 +78,6 @@
             color: #8cc63f;
         }
 
-        /* Tarjeta contenedor de imagen gigante de la derecha */
         .card-gradient-hero {
             border-radius: 40px;
             min-height: 480px;
@@ -128,7 +123,6 @@
             font-weight: bold;
         }
 
-        /* Oportunidades */
         .card-opportunity {
             border-radius: 24px;
             overflow: hidden;
@@ -175,7 +169,6 @@
             stroke: #e63946;
         }
 
-        /* Pasos 01 02 03 */
         .step-card-custom {
             background: #ffffff;
             border-radius: 24px;
@@ -184,7 +177,6 @@
             height: 100%;
         }
 
-        /* Footer verde oscuro */
         .footer-dark-custom {
             background-color: #0d3b36;
             color: #ffffff;
@@ -226,12 +218,11 @@
     </header>
 
     <main>
-        <!-- Sección Hero Exacta -->
+        <!-- Sección Hero -->
         <section class="hero-custom">
             <div class="full-width-container">
                 <div class="row align-items-center">
                     
-                    <!-- Lado Izquierdo -->
                     <div class="col-lg-6 pe-lg-5 mb-5 mb-lg-0">
                         <span class="fw-bold small text-uppercase tracking-wider mb-2 d-block" style="color: #8cc63f;">✦ HAZ QUE TU TIEMPO CUENTE</span>
                         <h1 class="hero-title-custom">
@@ -251,7 +242,6 @@
                             </a>
                         </div>
 
-                        <!-- Avatares -->
                         <div class="d-flex align-items-center pt-3">
                             <div class="d-flex me-3">
                                 <span class="badge rounded-circle bg-warning text-dark p-2 border border-2 border-white shadow-sm">MC</span>
@@ -265,12 +255,10 @@
                         </div>
                     </div>
 
-                    <!-- Lado Derecho (Imagen Principal de Cusco) -->
                     <div class="col-lg-6 ps-lg-4">
                         <div class="card-gradient-hero">
                             <img src="{{ asset('img/hero-cusco.jpg') }}" alt="Voluntariado en Cusco" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" onerror="this.src='https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=800'">
 
-                            <!-- Insignias flotantes -->
                             <div class="badge-floating-custom top-right">
                                 <div class="icon-box-small">✦</div>
                                 <div>
@@ -308,17 +296,35 @@
                     @endphp
 
                     @forelse($listaOportunidades as $item)
+                        @php
+                            // Identificación ultra segura de la clave primaria
+                            $itemId = $item->id ?? $item->id_oportunidad ?? $item->getKey();
+                        @endphp
                         <div class="col-md-4">
-                            <div class="card-opportunity" onclick="location.href='{{ route('oportunidades.show', $item->id) }}'">
+                            <div class="card-opportunity" onclick="if({{ $itemId ? 'true' : 'false' }}) location.href='{{ route('oportunidades.show', $itemId ?? 1) }}'">
                                 <div class="position-relative">
                                     <img src="{{ asset('img/' . ($item->imagen ?? 'bosques.jpg')) }}" alt="{{ $item->titulo }}" class="card-img-header" onerror="this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500'">
                                     <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
                                         <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">{{ $item->categoria }}</span>
-                                        <button type="button" class="like-heart-btn @auth {{ auth()->user()->favoritos->contains($item->id) ? 'active' : '' }} @endauth" onclick="toggleHeart(event, {{ $item->id }}, this)">
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2">
-                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                            </svg>
-                                        </button>
+                                        @auth
+    @php
+        $esFavorito = false;
+        try {
+            if (auth()->user()->favoritos) {
+                $esFavorito = auth()->user()->favoritos->pluck($item->getKeyName())->contains($itemId);
+            }
+        } catch (\Exception $e) {
+            $esFavorito = false;
+        }
+    @endphp
+    <button type="button" class="like-heart-btn {{ $esFavorito ? 'active' : '' }}" onclick="toggleHeart(event, {{ $itemId ?? 0 }}, this)">
+@else
+    <button type="button" class="like-heart-btn" onclick="toggleHeart(event, {{ $itemId ?? 0 }}, this)">
+@endauth
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+    </svg>
+</button>
                                     </div>
                                 </div>
                                 <div class="p-4">
@@ -424,10 +430,11 @@
         </div>
     </footer>
 
-    <!-- Script de AJAX para el corazon de Favoritos -->
     <script>
         function toggleHeart(event, id, btn) {
-            event.stopPropagation(); // Evita redirigir al detalle al hacer clic en el corazon
+            event.stopPropagation();
+            if (!id) return;
+
             fetch(`/favoritos/toggle/${id}`, {
                 method: 'POST',
                 headers: {

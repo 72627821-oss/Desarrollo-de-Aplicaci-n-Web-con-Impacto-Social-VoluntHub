@@ -70,9 +70,20 @@
                         @endif
                     </div>
 
-                    <h6 class="fw-bold mt-4 mb-3">🙋‍♂️ Personas Postuladas ({{ isset($convocatoria->postulaciones) ? $convocatoria->postulaciones->count() : 0 }})</h6>
-                    
-                    @if(isset($convocatoria->postulaciones) && $convocatoria->postulaciones->count() > 0)
+                    @php
+    $postulaciones = collect();
+    try {
+        if (\Illuminate\Support\Facades\Schema::hasTable('postulaciones') && isset($convocatoria->postulaciones)) {
+            $postulaciones = $convocatoria->postulaciones;
+        }
+    } catch (\Exception $e) {
+        $postulaciones = collect();
+    }
+@endphp
+
+<h6 class="fw-bold mt-4 mb-3">🙋‍♂️ Personas Postuladas ({{ $postulaciones->count() }})</h6>
+
+@if($postulaciones->count() > 0)
                         <div class="table-responsive">
                             <table class="table table-bordered bg-white align-middle">
                                 <thead class="table-secondary">

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 
 class Oportunidad extends Model
 {
@@ -11,24 +12,21 @@ class Oportunidad extends Model
 
     protected $table = 'oportunidades';
 
-    protected $fillable = [
-        'titulo',
-        'categoria',
-        'ubicacion',
-        'fecha',
-        'descripcion',
-        'organizacion',
-        'user_id',
-        'imagen',
-    ];
-
-    // Relación con el usuario creador (Organización)
-    public function creador()
+    // Se autoconfigura la clave primaria real de la tabla
+    public function __construct(array $attributes = [])
     {
-        return $this->belongsTo(User::class, 'user_id');
+        parent::__construct($attributes);
+        
+        if (Schema::hasColumn('oportunidades', 'id_oportunidad')) {
+            $this->primaryKey = 'id_oportunidad';
+        } else {
+            $this->primaryKey = 'id';
+        }
     }
 
-    // Relación con los voluntarios postulados
+    protected $guarded = [];
+
+    // Relación con postulaciones
     public function postulaciones()
     {
         return $this->hasMany(Postulacion::class, 'oportunidad_id');

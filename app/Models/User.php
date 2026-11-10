@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Schema;
 
 class User extends Authenticatable
 {
@@ -15,9 +16,10 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'nombre_organizacion',
-        'descripcion_organizacion',
         'telefono',
+        'nombre_organizacion',
+        'ruc',
+        'descripcion_org',
     ];
 
     protected $hidden = [
@@ -33,19 +35,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function esOrganizacion(): bool
-    {
-        return $this->role === 'organizacion';
-    }
-
-    public function esVoluntario(): bool
-    {
-        return $this->role === 'voluntario';
-    }
-
-    // Relación con Oportunidades Favoritas
+    // Relación limpia y segura con Oportunidades Favoritas
     public function favoritos()
     {
-        return $this->belongsToMany(Oportunidad::class, 'favoritos', 'user_id', 'oportunidad_id')->withTimestamps();
+        $foreignKeyOportunidad = Schema::hasColumn('oportunidades', 'id_oportunidad') ? 'id_oportunidad' : 'id';
+        
+        return $this->belongsToMany(
+            Oportunidad::class,
+            'favoritos',
+            'user_id',
+            'oportunidad_id',
+            'id',
+            $foreignKeyOportunidad
+        );
     }
 }
