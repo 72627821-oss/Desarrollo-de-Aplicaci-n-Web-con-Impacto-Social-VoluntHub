@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Oportunidad;
+use App\Models\Postulacion;
 use Illuminate\Http\Request;
 
 class OportunidadController extends Controller
@@ -19,7 +20,7 @@ class OportunidadController extends Controller
                   ->orWhere('categoria', 'LIKE', "%{$search}%");
         }
 
-        $oportunidades = $query->get();
+        $oportunidades = $query->latest()->get();
 
         return view('oportunidades.index', compact('oportunidades'));
     }
@@ -27,7 +28,15 @@ class OportunidadController extends Controller
     public function show($id)
     {
         $oportunidad = Oportunidad::findOrFail($id);
-        return view('oportunidades.show', compact('oportunidad'));
+        $yaPostulado = false;
+
+        if (auth()->check()) {
+            $yaPostulado = Postulacion::where('user_id', auth()->id())
+                ->where('oportunidad_id', $id)
+                ->exists();
+        }
+
+        return view('oportunidades.show', compact('oportunidad', 'yaPostulado'));
     }
 
     public function create()
@@ -52,10 +61,43 @@ class OportunidadController extends Controller
             'fecha' => $request->fecha,
             'descripcion' => $request->descripcion,
             'organizacion' => auth()->user()->nombre_organizacion ?? auth()->user()->name,
+            'user_id' => auth()->id(),
             'imagen' => 'bosques.jpg',
         ]);
 
-        return redirect()->route('oportunidades.index')->with('success', '¡Oportunidad publicada correctamente!');
+        return redirect()->route('dashboard')->with('success', '¡Convocatoria publicada con éxito!');
+    }
+
+    // Procesa la postulación del voluntario
+    public function mePostulo(Request $request, $id)
+    {
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
+        $existe = Postulacion::where('user_id', auth()->id())
+            ->where('oportunidad_id', $id)
+            ->exists();
+
+        if (!$existe) {
+            Postulacion::create([
+                'user_id' => auth()->id(),
+                'oportunidad_id' => $id,
+                'estado' => 'pendiente',
+                'mensaje' => $request->mensaje ?? 'Interesado en participar.',
+            ]);
+        }
+
+        return redirect()->back()->with('success', '¡Tu postulación ha sido enviada a la organización!');
+    }
+
+    // Cambiar estado de postulación (aceptar / rechazar voluntario)
+    public function cambiarEstadoPostulacion(Request $request, $id)
+    {
+        $postulacion = Postulacion::findOrFail($id);
+        $postulacion->update(['estado' => $request->estado]);
+
+        return redirect()->back()->with('success', 'Estado del voluntario actualizado.');
     }
 
     public function toggleFavorito($id)

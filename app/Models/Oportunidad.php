@@ -9,16 +9,28 @@ class Oportunidad extends Model
 {
     use HasFactory;
 
-    // Conecta con la tabla exacta de MySQL en español
     protected $table = 'oportunidades';
 
     protected $fillable = [
         'titulo',
-        'organizacion',
         'categoria',
         'ubicacion',
         'fecha',
         'descripcion',
-        'imagen'
+        'organizacion',
+        'user_id',
+        'imagen',
     ];
+
+    // Relación con el usuario creador (Organización)
+    public function creador()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // Relación con los voluntarios postulados
+    public function postulaciones()
+    {
+        return $this->hasMany(Postulacion::class, 'oportunidad_id');
+    }
 }
