@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Oportunidad;
 use App\Models\Postulacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class OportunidadController extends Controller
 {
@@ -54,21 +55,29 @@ class OportunidadController extends Controller
             'descripcion' => 'required|string',
         ]);
 
-        Oportunidad::create([
-            'titulo' => $request->titulo,
-            'categoria' => $request->categoria,
-            'ubicacion' => $request->ubicacion,
-            'fecha' => $request->fecha,
-            'descripcion' => $request->descripcion,
-            'organizacion' => auth()->user()->nombre_organizacion ?? auth()->user()->name,
-            'user_id' => auth()->id(),
-            'imagen' => 'bosques.jpg',
-        ]);
+        $op = new Oportunidad();
+        $op->titulo = $request->titulo;
+        $op->categoria = $request->categoria;
+        $op->ubicacion = $request->ubicacion;
+        $op->fecha = $request->fecha;
+        $op->descripcion = $request->descripcion;
+        $op->organizacion = auth()->user()->nombre_organizacion ?? auth()->user()->name;
+        $op->user_id = auth()->id();
+        $op->imagen = 'bosques.jpg';
+
+        // Solo se asigna si la columna existe físicamente en la BD
+        if (Schema::hasColumn('oportunidades', 'id_organizacion')) {
+            $op->id_organizacion = null; // Para no activar llaves foráneas rotas
+        }
+        if (Schema::hasColumn('oportunidades', 'id_categoria')) {
+            $op->id_categoria = null;
+        }
+
+        $op->save();
 
         return redirect()->route('dashboard')->with('success', '¡Convocatoria publicada con éxito!');
     }
 
-    // Procesa la postulación del voluntario
     public function mePostulo(Request $request, $id)
     {
         if (!auth()->check()) {
@@ -88,10 +97,9 @@ class OportunidadController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', '¡Tu postulación ha sido enviada a la organización!');
+        return redirect()->back()->with('success', '¡Tu postulación ha sido enviada!');
     }
 
-    // Cambiar estado de postulación (aceptar / rechazar voluntario)
     public function cambiarEstadoPostulacion(Request $request, $id)
     {
         $postulacion = Postulacion::findOrFail($id);

@@ -16,9 +16,23 @@
         .card-auth { border-radius: 24px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.08); background: #ffffff; }
         .btn-green-main { background-color: #8cc63f; color: #000000; font-weight: 700; border-radius: 12px; border: none; padding: 0.8rem; text-decoration: none; display: block; text-align: center; }
         .btn-green-main:hover { background-color: #7bb532; color: #000; }
-        .role-selector { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
-        .role-card { flex: 1; border: 2px solid #eef2f0; border-radius: 16px; padding: 1.25rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s ease; background-color: #fff; }
-        .role-card.active { border-color: #8cc63f; background-color: #f2f9e8; font-weight: 700; }
+        
+        /* Radios personalizados visibles para evitar errores */
+        .role-option-box {
+            border: 2px solid #eef2f0;
+            border-radius: 16px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: #fff;
+        }
+        .role-option-box:hover {
+            border-color: #8cc63f;
+        }
+        .btn-check:checked + .role-option-box {
+            border-color: #8cc63f;
+            background-color: #f2f9e8;
+        }
     </style>
 </head>
 <body class="d-flex align-items-center min-vh-100 py-5">
@@ -31,7 +45,7 @@
                             <span class="fw-bold fs-3 text-dark">VoluntHub</span>
                         </a>
                         <h4 class="fw-bold mt-2">Crea tu cuenta</h4>
-                        <p class="text-muted small">Elige tu perfil para comenzar en Cusco</p>
+                        <p class="text-muted small">Selecciona el tipo de perfil con el que ingresarás</p>
                     </div>
 
                     @if ($errors->any())
@@ -44,40 +58,45 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('register') }}" method="POST">
+                    <form action="{{ route('custom.register') }}" method="POST">
                         @csrf
                         
-                        <!-- Selector de Perfil -->
-                        <label class="form-label fw-bold small text-uppercase text-muted mb-2">Quiero registrarme como:</label>
-                        <div class="role-selector">
-                            <div class="role-card active" id="btn-voluntario" onclick="selectRole('voluntario')">
-                                <div class="fs-2 mb-1">🙋‍♂️</div>
-                                <div>Voluntario</div>
-                                <small class="text-muted fw-normal d-block" style="font-size: 0.75rem;">Para buscar y postular a causas</small>
+                        <!-- Seleccion Explicita de Rol -->
+                        <label class="form-label fw-bold small text-uppercase text-muted mb-2">Tipo de usuario:</label>
+                        <div class="row g-3 mb-4">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="role" id="role_voluntario" value="voluntario" {{ old('role', 'voluntario') === 'voluntario' ? 'checked' : '' }} onchange="toggleFormFields()">
+                                <label class="role-option-box w-100 text-center d-block" for="role_voluntario">
+                                    <div class="fs-2 mb-1">🙋‍♂️</div>
+                                    <strong class="d-block text-dark">Voluntario</strong>
+                                    <small class="text-muted" style="font-size: 0.75rem;">Para buscar y postular</small>
+                                </label>
                             </div>
-                            <div class="role-card" id="btn-organizacion" onclick="selectRole('organizacion')">
-                                <div class="fs-2 mb-1">🏛️</div>
-                                <div>Organización</div>
-                                <small class="text-muted fw-normal d-block" style="font-size: 0.75rem;">Para publicar convocatorias</small>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="role" id="role_organizacion" value="organizacion" {{ old('role') === 'organizacion' ? 'checked' : '' }} onchange="toggleFormFields()">
+                                <label class="role-option-box w-100 text-center d-block" for="role_organizacion">
+                                    <div class="fs-2 mb-1">🏛️</div>
+                                    <strong class="d-block text-dark">Organización</strong>
+                                    <small class="text-muted" style="font-size: 0.75rem;">Para publicar causas</small>
+                                </label>
                             </div>
                         </div>
-                        <input type="hidden" name="role" id="role-input" value="voluntario">
 
-                        <!-- Campos para el Representante o Usuario -->
+                        <!-- Nombre del usuario o representante -->
                         <div class="mb-3">
-                            <label class="form-label fw-bold small">Nombre Completo del Responsable</label>
+                            <label class="form-label fw-bold small" id="lbl-name">Nombre Completo</label>
                             <input type="text" name="name" class="form-control form-control-lg rounded-3 fs-6" value="{{ old('name') }}" required placeholder="ej. Juan Pérez">
                         </div>
 
-                        <!-- Campos Exclusivos para Organización -->
+                        <!-- Campos condicionales para Organizacion -->
                         <div id="fields-organizacion" style="display: none;">
                             <div class="mb-3">
                                 <label class="form-label fw-bold small">Nombre de la Organización / ONG</label>
-                                <input type="text" name="nombre_organizacion" class="form-control form-control-lg rounded-3 fs-6" value="{{ old('nombre_organizacion') }}" placeholder="ej. Asociación Patitas Cusco">
+                                <input type="text" name="nombre_organizacion" id="input_nombre_org" class="form-control form-control-lg rounded-3 fs-6" value="{{ old('nombre_organizacion') }}" placeholder="ej. Asociación Patitas Cusco">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold small">Descripción breve de la organización</label>
-                                <textarea name="descripcion_organizacion" class="form-control rounded-3 fs-6" rows="2" placeholder="¿A qué labor o causas se dedican?">{{ old('descripcion_organizacion') }}</textarea>
+                                <textarea name="descripcion_organizacion" class="form-control rounded-3 fs-6" rows="2" placeholder="¿A qué se dedica tu institución?">{{ old('descripcion_organizacion') }}</textarea>
                             </div>
                         </div>
 
@@ -102,7 +121,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-green-main w-100 mb-3">Completar Registro</button>
+                        <button type="submit" class="btn btn-green-main w-100 mb-3">Crear Cuenta</button>
                     </form>
 
                     <div class="text-center small">
@@ -114,22 +133,25 @@
     </div>
 
     <script>
-        function selectRole(role) {
-            document.getElementById('role-input').value = role;
-            const btnVol = document.getElementById('btn-voluntario');
-            const btnOrg = document.getElementById('btn-organizacion');
+        function toggleFormFields() {
+            const isOrg = document.getElementById('role_organizacion').checked;
             const fieldsOrg = document.getElementById('fields-organizacion');
+            const lblName = document.getElementById('lbl-name');
+            const inputNombreOrg = document.getElementById('input_nombre_org');
 
-            if (role === 'organizacion') {
-                btnOrg.classList.add('active');
-                btnVol.classList.remove('active');
+            if (isOrg) {
                 fieldsOrg.style.display = 'block';
+                lblName.textContent = 'Nombre del Responsable / Representante';
+                inputNombreOrg.setAttribute('required', 'required');
             } else {
-                btnVol.classList.add('active');
-                btnOrg.classList.remove('active');
                 fieldsOrg.style.display = 'none';
+                lblName.textContent = 'Nombre Completo';
+                inputNombreOrg.removeAttribute('required');
             }
         }
+
+        // Ejecutar al cargar la pagina por si regresa con errores de validacion
+        document.addEventListener('DOMContentLoaded', toggleFormFields);
     </script>
 </body>
 </html>
