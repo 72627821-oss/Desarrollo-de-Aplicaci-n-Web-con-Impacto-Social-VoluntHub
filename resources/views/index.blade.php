@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>VoluntHub | Voluntariado en Cusco</title>
     
     <!-- Carga directo de tu CSS original + Fuente Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}?v={{ time() }}">
 
     <style>
@@ -134,6 +136,13 @@
             background: #ffffff;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             height: 100%;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-opportunity:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
         }
 
         .card-img-header {
@@ -153,6 +162,17 @@
             justify-content: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             z-index: 5;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .like-heart-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .like-heart-btn.active svg {
+            fill: #e63946;
+            stroke: #e63946;
         }
 
         /* Pasos 01 02 03 */
@@ -169,6 +189,10 @@
             background-color: #0d3b36;
             color: #ffffff;
             padding: 5rem 0 3rem 0;
+        }
+
+        .ms-n2 {
+            margin-left: -0.5rem !important;
         }
     </style>
 </head>
@@ -244,7 +268,7 @@
                     <!-- Lado Derecho (Imagen Principal de Cusco) -->
                     <div class="col-lg-6 ps-lg-4">
                         <div class="card-gradient-hero">
-                            <img src="{{ asset('img/hero-cusco.jpeg') }}" alt="Voluntariado en Cusco" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0">
+                            <img src="{{ asset('img/hero-cusco.jpg') }}" alt="Voluntariado en Cusco" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" onerror="this.src='https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=800'">
 
                             <!-- Insignias flotantes -->
                             <div class="badge-floating-custom top-right">
@@ -279,62 +303,37 @@
                 </div>
 
                 <div class="row g-4">
-                    <!-- Tarjeta 1: Reforestación -->
-                    <div class="col-md-4">
-                        <div class="card-opportunity">
-                            <div class="position-relative">
-                                <img src="{{ asset('img/bosques.jpeg') }}" alt="Reforestación en el Valle Sagrado" class="card-img-header">
-                                <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
-                                    <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">Medio Ambiente</span>
-                                    <button class="like-heart-btn">♥</button>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">BOSQUES DE CUSCO</span>
-                                <h4 class="fw-bold text-dark my-2 fs-5">Reforestación en el Valle Sagrado</h4>
-                                <p class="text-muted small mb-1">📅 Sáb, 14 de junio</p>
-                                <p class="text-muted small mb-0">📍 Urubamba</p>
-                            </div>
-                        </div>
-                    </div>
+                    @php
+                        $listaOportunidades = isset($oportunidades) ? $oportunidades : \App\Models\Oportunidad::take(3)->get();
+                    @endphp
 
-                    <!-- Tarjeta 2: Refuerzo Escolar -->
-                    <div class="col-md-4">
-                        <div class="card-opportunity">
-                            <div class="position-relative">
-                                <img src="{{ asset('img/educacion.jpeg') }}" alt="Refuerzo escolar para niños" class="card-img-header">
-                                <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
-                                    <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">Educación</span>
-                                    <button class="like-heart-btn">♥</button>
+                    @forelse($listaOportunidades as $item)
+                        <div class="col-md-4">
+                            <div class="card-opportunity" onclick="location.href='{{ route('oportunidades.show', $item->id) }}'">
+                                <div class="position-relative">
+                                    <img src="{{ asset('img/' . ($item->imagen ?? 'bosques.jpg')) }}" alt="{{ $item->titulo }}" class="card-img-header" onerror="this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500'">
+                                    <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">{{ $item->categoria }}</span>
+                                        <button type="button" class="like-heart-btn @auth {{ auth()->user()->favoritos->contains($item->id) ? 'active' : '' }} @endauth" onclick="toggleHeart(event, {{ $item->id }}, this)">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">{{ $item->organizacion }}</span>
+                                    <h4 class="fw-bold text-dark my-2 fs-5">{{ $item->titulo }}</h4>
+                                    <p class="text-muted small mb-1">📅 {{ $item->fecha }}</p>
+                                    <p class="text-muted small mb-0">📍 {{ $item->ubicacion }}</p>
                                 </div>
                             </div>
-                            <div class="p-4">
-                                <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">SEMILLAS DEL ANDE</span>
-                                <h4 class="fw-bold text-dark my-2 fs-5">Refuerzo escolar para niños</h4>
-                                <p class="text-muted small mb-1">📅 Martes y jueves</p>
-                                <p class="text-muted small mb-0">📍 San Sebastián</p>
-                            </div>
                         </div>
-                    </div>
-
-                    <!-- Tarjeta 3: Cuidado Animal -->
-                    <div class="col-md-4">
-                        <div class="card-opportunity">
-                            <div class="position-relative">
-                                <img src="{{ asset('img/animales.jpeg') }}" alt="Jornada de cuidado animal" class="card-img-header">
-                                <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
-                                    <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">Protección Animal</span>
-                                    <button class="like-heart-btn">♥</button>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">PATITAS CUSCO</span>
-                                <h4 class="fw-bold text-dark my-2 fs-5">Jornada de cuidado animal</h4>
-                                <p class="text-muted small mb-1">📅 Dom, 22 de junio</p>
-                                <p class="text-muted small mb-0">📍 Wanchaq</p>
-                            </div>
+                    @empty
+                        <div class="col-12 text-center text-muted py-5">
+                            <p class="fs-5">No hay oportunidades registradas todavía.</p>
                         </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </section>
@@ -425,7 +424,34 @@
         </div>
     </footer>
 
-    <!-- CSS Bootstrap 5 auxiliar para flexbox y columnas dinámicas -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Script de AJAX para el corazon de Favoritos -->
+    <script>
+        function toggleHeart(event, id, btn) {
+            event.stopPropagation(); // Evita redirigir al detalle al hacer clic en el corazon
+            fetch(`/favoritos/toggle/${id}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                if (res.status === 401) {
+                    window.location.href = "{{ route('login') }}";
+                    return;
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (data && data.success) {
+                    if (data.is_favorite) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>

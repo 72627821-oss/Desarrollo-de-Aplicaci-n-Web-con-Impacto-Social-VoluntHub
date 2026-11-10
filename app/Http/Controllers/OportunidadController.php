@@ -60,6 +60,25 @@ class OportunidadController extends Controller
 
     public function toggleFavorito($id)
     {
-        return response()->json(['success' => true, 'message' => 'Favorito actualizado']);
+        if (!auth()->check()) {
+            return response()->json(['success' => false, 'redirect' => route('login')], 401);
+        }
+
+        $user = auth()->user();
+        $favoritos = $user->favoritos();
+
+        if ($favoritos->where('oportunidad_id', $id)->exists()) {
+            $favoritos->detach($id);
+            $attached = false;
+        } else {
+            $favoritos->attach($id);
+            $attached = true;
+        }
+
+        return response()->json([
+            'success' => true,
+            'is_favorite' => $attached,
+            'message' => $attached ? 'Añadido a favoritos' : 'Eliminado de favoritos'
+        ]);
     }
 }

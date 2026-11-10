@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosotros | VoluntHub</title>
+    <title>VoluntHub | Sobre Nuestra Plataforma</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +14,8 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+            margin: 0;
+            padding: 0;
             background-color: #ffffff;
             color: #1a2b27;
         }
@@ -41,8 +43,10 @@
             transition: all 0.2s;
         }
 
-        .nav-link-custom:hover { color: #8cc63f; }
-        .nav-link-custom.active { color: #000000; border-bottom: 3px solid #8cc63f; }
+        .nav-link-custom.active {
+            color: #000000;
+            border-bottom: 3px solid #8cc63f;
+        }
 
         .btn-green-main {
             background-color: #8cc63f;
@@ -53,21 +57,27 @@
             text-decoration: none;
             display: inline-block;
             border: none;
-        }
-
-        .btn-green-main:hover { background-color: #7bb532; color: #000; }
-
-        .card-stat {
-            background: #f8faf7;
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid #eef2f0;
+            font-size: 0.95rem;
         }
 
         .footer-dark-custom {
             background-color: #0d3b36;
             color: #ffffff;
-            padding: 4rem 0 2rem 0;
+            padding: 5rem 0 3rem 0;
+        }
+
+        .about-hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #111827;
+        }
+
+        .card-image-box {
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            min-height: 400px;
         }
     </style>
 </head>
@@ -88,6 +98,10 @@
 
                 @auth
                     <a href="{{ route('dashboard') }}" class="nav-link-custom fw-bold text-success">Mi Panel</a>
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger btn-sm rounded-3">Cerrar sesión</button>
+                    </form>
                 @else
                     <a href="{{ route('login') }}" class="nav-link-custom">Iniciar sesión</a>
                     <a href="{{ route('register') }}" class="btn-green-main">Crear cuenta</a>
@@ -96,78 +110,76 @@
         </div>
     </header>
 
-    <main>
-        <!-- Hero Nosotros -->
-        <section class="py-5" style="background: linear-gradient(180deg, #ffffff 0%, #f7faf6 100%);">
-            <div class="full-width-container py-4">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 pe-lg-5">
-                        <span class="fw-bold small text-uppercase tracking-wider d-block mb-2" style="color: #8cc63f;">✦ SOBRE NUESTRA PLATAFORMA</span>
-                        <h1 class="display-4 fw-extrabold text-dark mb-4">Conectando solidaridad en el corazón del Cusco</h1>
-                        <p class="fs-5 text-muted mb-4" style="line-height: 1.7;">
-                            VoluntHub nació para acortar la brecha entre organizaciones locales que necesitan apoyo y ciudadanos comprometidos con generar impacto positivo en su comunidad.
-                        </p>
-                        <div class="d-flex gap-3">
-                            <a href="{{ route('oportunidades.index') }}" class="btn-green-main">Explorar causas &rarr;</a>
-                            <a href="{{ route('register') }}" class="btn btn-outline-dark fw-bold px-4 rounded-3 d-flex align-items-center">Registrar organización</a>
-                        </div>
+    <main class="py-5">
+        <div class="full-width-container">
+            <div class="row align-items-center g-5 py-4">
+                <div class="col-lg-6 pe-lg-5">
+                    <span class="fw-bold small text-uppercase tracking-wider mb-2 d-block" style="color: #8cc63f;">✦ SOBRE NUESTRA PLATAFORMA</span>
+                    <h1 class="about-hero-title mb-4">
+                        Conectando solidaridad en el corazón del Cusco
+                    </h1>
+                    <p class="fs-5 text-secondary leading-relaxed mb-5">
+                        VoluntHub nació para acortar la brecha entre organizaciones locales que necesitan apoyo y ciudadanos comprometidos con generar un impacto positivo en su comunidad.
+                    </p>
+
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="{{ route('oportunidades.index') }}" class="btn-green-main px-4 py-3 fs-6">
+                            Explorar causas &rarr;
+                        </a>
+                        <a href="{{ route('register') }}" class="btn btn-outline-dark rounded-3 px-4 py-3 fw-bold fs-6">
+                            Registrar organización
+                        </a>
                     </div>
-                    <div class="col-lg-6 mt-5 mt-lg-0">
-                        <img src="{{ asset('img/hero-cusco.jpg') }}" class="w-100 rounded-4 shadow-sm" style="height: 400px; object-fit: cover;" alt="Nosotros VoluntHub">
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card-image-box position-relative">
+                        <img src="{{ asset('img/hero-cusco.jpg') }}" alt="Nosotros VoluntHub Cusco" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" onerror="this.src='https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800'">
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Valores / Pilares -->
-        <section class="py-5 bg-white">
-            <div class="full-width-container py-4">
-                <div class="text-center mb-5">
-                    <span class="fw-bold small text-uppercase tracking-wider d-block mb-1" style="color: #8cc63f;">NUESTROS PILARES</span>
-                    <h2 class="fw-bold display-6">¿Por qué existe VoluntHub?</h2>
-                </div>
-
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="card-stat h-100">
-                            <div class="fs-1 mb-3">🤝</div>
-                            <h4 class="fw-bold text-dark">Conexión Transparente</h4>
-                            <p class="text-muted mb-0">Facilitamos la comunicación directa entre voluntarios con vocación de servicio y proyectos sociales verificados.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card-stat h-100">
-                            <div class="fs-1 mb-3">🌱</div>
-                            <h4 class="fw-bold text-dark">Desarrollo Sostenible</h4>
-                            <p class="text-muted mb-0">Apoyamos iniciativas enfocadas en el medio ambiente, educación rural y apoyo social en Cusco y el Valle Sagrado.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card-stat h-100">
-                            <div class="fs-1 mb-3">⭐</div>
-                            <h4 class="fw-bold text-dark">Reconocimiento</h4>
-                            <p class="text-muted mb-0">Valoramos y visibilizamos el tiempo invertido por los voluntarios mediante certificados e historial de participación.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer-dark-custom">
-        <div class="full-width-container d-flex justify-content-between align-items-center">
-            <div>
-                <span class="fw-bold fs-4 text-white">VoluntHub</span>
-                <p class="small text-white-50 mb-0">Plataforma social de voluntariado en Cusco.</p>
+    <!-- Footer Verde Oscuro -->
+    <footer class="footer-dark-custom mt-5">
+        <div class="full-width-container">
+            <div class="row align-items-center border-bottom border-secondary border-opacity-25 pb-5 mb-5">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <span class="text-uppercase extra-small text-white-50 fw-bold d-block mb-1">NUESTRO IMPACTO</span>
+                    <h3 class="fw-bold mb-0 text-white fs-2">Crece con cada persona</h3>
+                </div>
+                <div class="col-md-8">
+                    <div class="row text-center">
+                        <div class="col-4 border-start border-secondary border-opacity-25">
+                            <h2 class="fw-extrabold display-5 mb-0" style="color: #8cc63f;">+500</h2>
+                            <span class="small text-white-50">Voluntarios registrados</span>
+                        </div>
+                        <div class="col-4 border-start border-secondary border-opacity-25">
+                            <h2 class="fw-extrabold display-5 mb-0" style="color: #8cc63f;">+30</h2>
+                            <span class="small text-white-50">Organizaciones aliadas</span>
+                        </div>
+                        <div class="col-4 border-start border-secondary border-opacity-25">
+                            <h2 class="fw-extrabold display-5 mb-0" style="color: #8cc63f;">+1200</h2>
+                            <span class="small text-white-50">Horas de voluntariado</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="small text-white-50">
-                © 2026 VoluntHub
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <span class="fw-bold fs-3 text-white">VoluntHub</span>
+                    <p class="small text-white-50 mb-0 mt-1">Conectamos personas con causas que transforman Cusco.</p>
+                </div>
+                <div class="d-flex gap-4 small text-white-50">
+                    <a href="{{ route('oportunidades.index') }}" class="text-white-50 text-decoration-none">Oportunidades</a>
+                    <a href="{{ route('nosotros') }}" class="text-white-50 text-decoration-none">Nosotros</a>
+                    <a href="#" class="text-white-50 text-decoration-none">Contacto</a>
+                    <span>© 2026 VoluntHub</span>
+                </div>
             </div>
         </div>
     </footer>
-
 </body>
 </html>

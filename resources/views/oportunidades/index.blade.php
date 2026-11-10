@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Oportunidades de Voluntariado | VoluntHub</title>
+    <title>VoluntHub | Oportunidades de Voluntariado</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,9 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
-            background-color: #f8faf7;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
             color: #1a2b27;
         }
 
@@ -42,8 +44,10 @@
             transition: all 0.2s;
         }
 
-        .nav-link-custom:hover { color: #8cc63f; }
-        .nav-link-custom.active { color: #000000; border-bottom: 3px solid #8cc63f; }
+        .nav-link-custom.active {
+            color: #000000;
+            border-bottom: 3px solid #8cc63f;
+        }
 
         .btn-green-main {
             background-color: #8cc63f;
@@ -64,12 +68,13 @@
             background: #ffffff;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             height: 100%;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .card-opportunity:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
         }
 
         .card-img-header {
@@ -90,26 +95,28 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             z-index: 5;
             cursor: pointer;
-            color: #cbd5e1;
-            font-size: 1.2rem;
-            transition: all 0.2s ease;
+            transition: transform 0.2s;
         }
 
-        .like-heart-btn.active, .like-heart-btn:hover {
-            color: #ef4444;
+        .like-heart-btn:hover {
             transform: scale(1.1);
+        }
+
+        .like-heart-btn.active svg {
+            fill: #e63946;
+            stroke: #e63946;
         }
 
         .footer-dark-custom {
             background-color: #0d3b36;
             color: #ffffff;
-            padding: 4rem 0 2rem 0;
+            padding: 5rem 0 3rem 0;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header / Navbar Principal -->
     <header class="header-custom">
         <div class="full-width-container d-flex justify-content-between align-items-center">
             <a href="{{ route('home') }}" class="d-flex align-items-center text-decoration-none">
@@ -124,6 +131,10 @@
 
                 @auth
                     <a href="{{ route('dashboard') }}" class="nav-link-custom fw-bold text-success">Mi Panel</a>
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger btn-sm rounded-3">Cerrar sesión</button>
+                    </form>
                 @else
                     <a href="{{ route('login') }}" class="nav-link-custom">Iniciar sesión</a>
                     <a href="{{ route('register') }}" class="btn-green-main">Crear cuenta</a>
@@ -132,129 +143,132 @@
         </div>
     </header>
 
-    <main class="py-5">
+    <main class="py-5" style="background-color: #ffffff;">
         <div class="full-width-container">
-            <div class="mb-5">
-                <span class="fw-bold small text-uppercase tracking-wider d-block mb-1" style="color: #8cc63f;">✦ CATÁLOGO COMPLETO</span>
-                <h1 class="fw-bold text-dark display-5">Oportunidades de Voluntariado</h1>
-                <p class="text-muted fs-5">Explora las causas activas en Cusco y encuentra dónde sumar tu apoyo.</p>
-            </div>
+            <span class="fw-bold small text-uppercase tracking-wider d-block mb-1" style="color: #8cc63f;">✦ CATÁLOGO COMPLETO</span>
+            <h1 class="display-4 fw-extrabold mb-2" style="font-weight: 800;">Oportunidades de Voluntariado</h1>
+            <p class="text-muted fs-5 mb-4">Explora las causas activas en Cusco y encuentra dónde sumar tu apoyo.</p>
 
-            <!-- Buscador -->
+            <!-- Buscador Receptivo -->
             <form action="{{ route('oportunidades.index') }}" method="GET" class="row g-3 mb-5">
-                <div class="col-md-8">
-                    <input type="text" name="search" class="form-control form-control-lg rounded-3 fs-6" placeholder="Buscar por palabra clave, causa o ubicación (ej. Urubamba)..." value="{{ request('search') }}">
+                <div class="col-md-9">
+                    <input type="text" name="search" class="form-control form-control-lg rounded-3 fs-6 p-3" value="{{ request('search') }}" placeholder="Buscar por palabra clave, causa o ubicación (ej. Urubamba)...">
                 </div>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-green-main w-100 py-3">Buscar causas</button>
+                <div class="col-md-3">
+                    <button type="submit" class="btn-green-main w-100 h-100 fs-6">Buscar causas</button>
                 </div>
             </form>
 
-            <!-- Listado de Tarjetas -->
-            <div class="row g-4">
-                <!-- Tarjeta 1: Reforestación -->
-                <div class="col-md-4">
-                    <div class="card-opportunity h-100">
-                        <div class="position-relative">
-                            <a href="{{ route('oportunidades.show', 1) }}">
-                                <img src="{{ asset('img/bosques.jpg') }}" alt="Reforestación" class="card-img-header" onerror="this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600'">
-                            </a>
-                            <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
-                                <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">Medio Ambiente</span>
-                                <button class="like-heart-btn" onclick="toggleHeart(this, 1)">♥</button>
-                            </div>
-                        </div>
-                        <div class="p-4 d-flex flex-column justify-content-between">
-                            <div>
-                                <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">BOSQUES DE CUSCO</span>
-                                <a href="{{ route('oportunidades.show', 1) }}" class="text-decoration-none">
-                                    <h4 class="fw-bold text-dark my-2 fs-5">Reforestación en el Valle Sagrado</h4>
-                                </a>
-                                <p class="text-muted small mb-1">📅 Sáb, 14 de junio</p>
-                                <p class="text-muted small mb-3">📍 Urubamba</p>
-                            </div>
-                            <a href="{{ route('oportunidades.show', 1) }}" class="btn btn-outline-success btn-sm w-100 rounded-3 fw-bold py-2">Más información &rarr;</a>
-                        </div>
-                    </div>
-                </div>
+            <!-- Listado de Oportunidades -->
+            <div class="row g-4 mb-5">
+                @php
+                    $listaOportunidades = isset($oportunidades) && count($oportunidades) > 0 ? $oportunidades : \App\Models\Oportunidad::all();
+                @endphp
 
-                <!-- Tarjeta 2: Refuerzo Escolar -->
-                <div class="col-md-4">
-                    <div class="card-opportunity h-100">
-                        <div class="position-relative">
-                            <a href="{{ route('oportunidades.show', 2) }}">
-                                <img src="{{ asset('img/educacion.jpg') }}" alt="Educación" class="card-img-header" onerror="this.src='https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600'">
-                            </a>
-                            <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
-                                <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">Educación</span>
-                                <button class="like-heart-btn" onclick="toggleHeart(this, 2)">♥</button>
+                @forelse($listaOportunidades as $item)
+                    <div class="col-md-4">
+                        <div class="card-opportunity" onclick="location.href='{{ route('oportunidades.show', $item->id) }}'">
+                            <div class="position-relative">
+                                <img src="{{ asset('img/' . ($item->imagen ?? 'bosques.jpg')) }}" alt="{{ $item->titulo }}" class="card-img-header" onerror="this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500'">
+                                <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">{{ $item->categoria }}</span>
+                                    <button type="button" class="like-heart-btn @auth {{ auth()->user()->favoritos->contains($item->id) ? 'active' : '' }} @endauth" onclick="toggleHeart(event, {{ $item->id }}, this)">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="p-4 d-flex flex-column justify-content-between">
-                            <div>
-                                <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">SEMILLAS DEL ANDE</span>
-                                <a href="{{ route('oportunidades.show', 2) }}" class="text-decoration-none">
-                                    <h4 class="fw-bold text-dark my-2 fs-5">Refuerzo escolar para niños</h4>
-                                </a>
-                                <p class="text-muted small mb-1">📅 Martes y jueves</p>
-                                <p class="text-muted small mb-3">📍 San Sebastián</p>
+                            <div class="p-4 d-flex flex-column flex-grow-1">
+                                <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">{{ $item->organizacion }}</span>
+                                <h4 class="fw-bold text-dark my-2 fs-5">{{ $item->titulo }}</h4>
+                                <p class="text-muted small mb-1">📅 {{ $item->fecha }}</p>
+                                <p class="text-muted small mb-4">📍 {{ $item->ubicacion }}</p>
+                                
+                                <div class="mt-auto">
+                                    <button class="btn btn-outline-success w-100 rounded-3 fw-bold text-dark" style="border-color: #8cc63f;">Más información &rarr;</button>
+                                </div>
                             </div>
-                            <a href="{{ route('oportunidades.show', 2) }}" class="btn btn-outline-success btn-sm w-100 rounded-3 fw-bold py-2">Más información &rarr;</a>
                         </div>
                     </div>
-                </div>
-
-                <!-- Tarjeta 3: Cuidado Animal -->
-                <div class="col-md-4">
-                    <div class="card-opportunity h-100">
-                        <div class="position-relative">
-                            <a href="{{ route('oportunidades.show', 3) }}">
-                                <img src="{{ asset('img/animales.jpg') }}" alt="Animales" class="card-img-header" onerror="this.src='https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=600'">
-                            </a>
-                            <div class="position-absolute top-0 start-0 end-0 p-3 d-flex justify-content-between align-items-center">
-                                <span class="badge bg-white text-dark rounded-pill px-3 py-2 fw-normal shadow-sm">Protección Animal</span>
-                                <button class="like-heart-btn" onclick="toggleHeart(this, 3)">♥</button>
-                            </div>
-                        </div>
-                        <div class="p-4 d-flex flex-column justify-content-between">
-                            <div>
-                                <span class="text-uppercase text-muted fw-bold extra-small" style="font-size: 0.75rem;">PATITAS CUSCO</span>
-                                <a href="{{ route('oportunidades.show', 3) }}" class="text-decoration-none">
-                                    <h4 class="fw-bold text-dark my-2 fs-5">Jornada de cuidado animal</h4>
-                                </a>
-                                <p class="text-muted small mb-1">📅 Dom, 22 de junio</p>
-                                <p class="text-muted small mb-3">📍 Wanchaq</p>
-                            </div>
-                            <a href="{{ route('oportunidades.show', 3) }}" class="btn btn-outline-success btn-sm w-100 rounded-3 fw-bold py-2">Más información &rarr;</a>
-                        </div>
+                @empty
+                    <div class="col-12 text-center text-muted py-5">
+                        <h4 class="fw-bold">No se encontraron oportunidades registradas.</h4>
+                        <a href="{{ route('oportunidades.index') }}" class="btn btn-link text-success fw-bold text-decoration-none">Ver todas las causas</a>
                     </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer Verde Oscuro Completo -->
     <footer class="footer-dark-custom">
-        <div class="full-width-container d-flex justify-content-between align-items-center">
-            <div>
-                <span class="fw-bold fs-4 text-white">VoluntHub</span>
-                <p class="small text-white-50 mb-0">Conectando personas con causas en Cusco.</p>
+        <div class="full-width-container">
+            <div class="row align-items-center border-bottom border-secondary border-opacity-25 pb-5 mb-5">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <span class="text-uppercase extra-small text-white-50 fw-bold d-block mb-1">NUESTRO IMPACTO</span>
+                    <h3 class="fw-bold mb-0 text-white fs-2">Crece con cada persona</h3>
+                </div>
+                <div class="col-md-8">
+                    <div class="row text-center">
+                        <div class="col-4 border-start border-secondary border-opacity-25">
+                            <h2 class="fw-extrabold display-5 mb-0" style="color: #8cc63f;">+500</h2>
+                            <span class="small text-white-50">Voluntarios registrados</span>
+                        </div>
+                        <div class="col-4 border-start border-secondary border-opacity-25">
+                            <h2 class="fw-extrabold display-5 mb-0" style="color: #8cc63f;">+30</h2>
+                            <span class="small text-white-50">Organizaciones aliadas</span>
+                        </div>
+                        <div class="col-4 border-start border-secondary border-opacity-25">
+                            <h2 class="fw-extrabold display-5 mb-0" style="color: #8cc63f;">+1200</h2>
+                            <span class="small text-white-50">Horas de voluntariado</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="small text-white-50">
-                © 2026 VoluntHub
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <span class="fw-bold fs-3 text-white">VoluntHub</span>
+                    <p class="small text-white-50 mb-0 mt-1">Conectamos personas con causas que transforman Cusco.</p>
+                </div>
+                <div class="d-flex gap-4 small text-white-50">
+                    <a href="{{ route('oportunidades.index') }}" class="text-white-50 text-decoration-none">Oportunidades</a>
+                    <a href="{{ route('nosotros') }}" class="text-white-50 text-decoration-none">Nosotros</a>
+                    <a href="#" class="text-white-50 text-decoration-none">Contacto</a>
+                    <span>© 2026 VoluntHub</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script AJAX para Favoritos -->
     <script>
-        function toggleHeart(btn, id) {
-            btn.classList.toggle('active');
-            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        function toggleHeart(event, id, btn) {
+            event.stopPropagation();
             fetch(`/favoritos/toggle/${id}`, {
                 method: 'POST',
-                headers: { 'X-CSRF-TOKEN': token, 'Content-Type': 'application/json' }
-            }).catch(e => console.log(e));
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                if (res.status === 401) {
+                    window.location.href = "{{ route('login') }}";
+                    return;
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (data && data.success) {
+                    if (data.is_favorite) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                }
+            });
         }
     </script>
 </body>

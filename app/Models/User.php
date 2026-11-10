@@ -42,4 +42,10 @@ class User extends Authenticatable
     {
         return $this->role === 'voluntario';
     }
+
+    // Relación con Oportunidades Favoritas
+    public function favoritos()
+    {
+        return $this->belongsToMany(Oportunidad::class, 'favoritos', 'user_id', 'oportunidad_id')->withTimestamps();
+    }
 }
