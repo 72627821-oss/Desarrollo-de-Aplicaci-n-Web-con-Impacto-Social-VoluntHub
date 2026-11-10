@@ -14,14 +14,17 @@ Route::get('/oportunidades/{id}', [OportunidadController::class, 'show'])->name(
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 
-// 3. Panel Diferenciado segun el Rol del Usuario
+// 3. Panel y Creacion Protegidos por Autenticacion
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         if (auth()->user()->esOrganizacion()) {
-            return view('organizacion.panel'); // Carga resources/views/organizacion/panel.blade.php
+            return view('organizacion.panel');
         }
-        return view('voluntario.panel'); // Carga resources/views/voluntario/panel.blade.php
+        return view('voluntario.panel');
     })->name('dashboard');
+
+    Route::get('/oportunidades/crear/nueva', [OportunidadController::class, 'create'])->name('oportunidades.create');
+    Route::post('/oportunidades/guardar', [OportunidadController::class, 'store'])->name('oportunidades.store');
 
     Route::post('/favoritos/toggle/{id}', [OportunidadController::class, 'toggleFavorito'])->name('favoritos.toggle');
 });

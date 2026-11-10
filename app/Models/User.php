@@ -33,7 +33,6 @@ class User extends Authenticatable
         ];
     }
 
-    // Métodos para verificar el rol en vistas y controladores
     public function esOrganizacion(): bool
     {
         return $this->role === 'organizacion';

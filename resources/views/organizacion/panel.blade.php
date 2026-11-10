@@ -18,12 +18,18 @@
                 <h2 class="fw-bold mt-2">🏛️ {{ auth()->user()->nombre_organizacion ?? auth()->user()->name }}</h2>
                 <p class="text-muted mb-0">Contacto: {{ auth()->user()->name }} ({{ auth()->user()->email }})</p>
             </div>
-            <a href="{{ route('home') }}" class="btn btn-outline-secondary">Volver al Inicio</a>
+            <div>
+                <a href="{{ route('home') }}" class="btn btn-outline-secondary me-2">Volver al Inicio</a>
+                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button>
+                </form>
+            </div>
         </div>
         <hr class="my-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="fw-bold mb-0">Tus Convocatorias de Voluntariado</h4>
-            <button class="btn btn-success fw-bold py-2 px-3 rounded-3" style="background-color: #8cc63f; border: none; color: #000;">+ Publicar Oportunidad</button>
+            <a href="{{ route('oportunidades.create') }}" class="btn btn-success fw-bold py-2 px-3 rounded-3" style="background-color: #8cc63f; border: none; color: #000;">+ Publicar Oportunidad</a>
         </div>
         <div class="p-4 bg-light rounded-3 text-center text-muted">
             Aún no has publicado convocatorias en Cusco. ¡Crea la primera para recibir voluntarios!

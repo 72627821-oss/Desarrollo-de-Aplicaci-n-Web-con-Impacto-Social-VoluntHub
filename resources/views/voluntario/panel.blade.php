@@ -17,7 +17,13 @@
                 <span class="badge bg-success text-white px-3 py-2 rounded-pill">Perfil Voluntario</span>
                 <h2 class="fw-bold mt-2">¡Hola, {{ auth()->user()->name }}! 👋</h2>
             </div>
-            <a href="{{ route('home') }}" class="btn btn-outline-secondary">Volver al Inicio</a>
+            <div>
+                <a href="{{ route('home') }}" class="btn btn-outline-secondary me-2">Volver al Inicio</a>
+                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button>
+                </form>
+            </div>
         </div>
         <hr class="my-4">
         <h4 class="fw-bold mb-3">Tus Postulaciones y Favoritos</h4>
