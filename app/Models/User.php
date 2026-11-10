@@ -35,7 +35,18 @@ class User extends Authenticatable
         ];
     }
 
-    // Relación limpia y segura con Oportunidades Favoritas
+    // Métodos para verificar rol
+    public function esVoluntario()
+    {
+        return $this->role === 'voluntario';
+    }
+
+    public function esOrganizacion()
+    {
+        return $this->role === 'organizacion';
+    }
+
+    // Relación con Oportunidades Favoritas
     public function favoritos()
     {
         $foreignKeyOportunidad = Schema::hasColumn('oportunidades', 'id_oportunidad') ? 'id_oportunidad' : 'id';

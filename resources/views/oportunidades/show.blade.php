@@ -84,22 +84,22 @@
                             <p class="text-muted small m-0 mt-1">Postula ahora y la organización se pondrá en contacto contigo.</p>
                         </div>
                         
-                        @auth
-                            @if(auth()->user()->esVoluntario())
-                                @if($yaPostulado)
-                                    <button class="btn btn-secondary fs-6 rounded-3 px-4 fw-bold" disabled>✓ Ya estás postulado</button>
-                                @else
-                                    <form action="{{ route('oportunidades.postular', $oportunidad->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn-green-main fs-6">Quiero postularme &rarr;</button>
-                                    </form>
-                                @endif
-                            @else
-                                <span class="badge bg-secondary p-2">Acceso de Organización (no postula)</span>
-                            @endif
-                        @else
-                            <a href="{{ route('register') }}" class="btn-green-main fs-6">Regístrate para postular &rarr;</a>
-                        @endauth
+                         @auth
+    @if(auth()->user()->role === 'voluntario' || (method_exists(auth()->user(), 'esVoluntario') && auth()->user()->esVoluntario()))
+        @if($yaPostulado)
+            <button class="btn btn-secondary fs-6 rounded-3 px-4 fw-bold" disabled>✓ Ya estás postulado</button>
+        @else
+            <form action="{{ route('oportunidades.postular', $oportunidad->id ?? $oportunidad->id_oportunidad ?? $oportunidad->getKey()) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn-green-main fs-6">Quiero postularme &rarr;</button>
+            </form>
+        @endif
+    @else
+        <span class="badge bg-secondary p-2">Acceso de Organización (no postula)</span>
+    @endif
+@else
+    <a href="{{ route('login') }}" class="btn-green-main fs-6">Inicia sesión para postular</a>
+@endauth
                     </div>
                 </div>
             </div>
